@@ -1,96 +1,213 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>Lazarus · Long-haul Corridor Pitch Package</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lazarus · Логистическая транспортная компания</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
-<style>
-  body { background: var(--bg); }
-  .wrap { max-width: 1200px; margin: 0 auto; padding: 72px 56px 96px;}
-  .chrome { display:flex; justify-content:space-between; font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase;}
-  .chrome .dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; display: inline-block; margin-right: 10px; vertical-align: middle;}
-  h1 { font-family: var(--display); font-weight: 800; font-size: 96px; line-height: 0.95; letter-spacing: -0.03em; margin: 40px 0 24px;}
-  h1 .num { color: var(--warm);}
-  .lede { color: var(--text-2); font-size: 22px; line-height: 1.5; max-width: 900px;}
-  .stat-row { display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 56px 0 24px;}
-  .stat { padding: 24px 26px; background: var(--surface); border: 1px solid var(--line);}
-  .stat .k { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.14em;}
-  .stat .v { font-family: var(--display); font-weight: 700; font-size: 36px; margin-top: 6px; letter-spacing: -0.01em;}
-  .stat .v.cyan { color: var(--cyan);} .stat .v.warm { color: var(--warm);} .stat .v.green { color: var(--green);}
-  h2.sec { font-family: var(--display); font-size: 28px; margin: 64px 0 24px; letter-spacing: -0.01em; border-top: 1px solid var(--line); padding-top: 32px;}
-  .cards { display:grid; grid-template-columns: 1fr 1fr; gap: 20px;}
-  a.card {
-    background: var(--surface); border: 1px solid var(--line); padding: 28px 30px;
-    display:flex; flex-direction: column; gap: 12px; text-decoration: none; color: var(--text);
-    transition: border-color 0.12s ease, background 0.12s ease;
-  }
-  a.card:hover { border-color: var(--cyan); background: #172B46;}
-  a.card .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--cyan);}
-  a.card h3 { font-family: var(--display); font-size: 26px; margin: 0; letter-spacing: -0.01em;}
-  a.card p { color: var(--text-2); font-size: 15px; line-height: 1.55; margin: 0;}
-  a.card .foot { margin-top: 8px; font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.12em; display:flex; justify-content: space-between;}
-  a.card .foot .go { color: var(--warm);}
-</style>
+<link rel="stylesheet" href="brand.css">
 </head>
 <body>
-<div class="wrap">
-  <div class="chrome">
-    <div><span class="dot"></span>LAZARUS · STRATEGY PACKAGE · APR 2026</div>
-    <div>CONFIDENTIAL · CEO REVIEW</div>
-  </div>
 
-  <h1>The <span class="num">€100–350K</span> corridor opportunity.</h1>
-  <p class="lede">Complete pitch package: a 12-slide presentation with a live financial model, two high-fidelity landing page mockups (hub + India→Uzbekistan child), a printable executive summary, and internal pitcher's notes for whoever runs the room.</p>
-
-  <div class="stat-row">
-    <div class="stat"><div class="k">CONSERVATIVE YR 1 MARGIN</div><div class="v cyan">€103K</div></div>
-    <div class="stat"><div class="k">REALISTIC YR 1 MARGIN</div><div class="v warm">€352K</div></div>
-    <div class="stat"><div class="k">PHASE 1 BUILD</div><div class="v">€22K</div></div>
-    <div class="stat"><div class="k">PHASE 1 TIMELINE</div><div class="v green">8 weeks</div></div>
-  </div>
-
-  <h2 class="sec">◆ DELIVERABLES</h2>
-  <div class="cards">
-    <a class="card" href="deck.html">
-      <div class="tag">01 · PRESENTATION</div>
-      <h3>12-slide CEO deck</h3>
-      <p>The narrative spine. Opens with the sales manager's own words, walks through market growth, the funnel math, and a live interactive calculator the CEO can break in the room. Ends on the hero reveal.</p>
-      <div class="foot"><span>16:9 · 1920×1080</span><span class="go">OPEN →</span></div>
-    </a>
-    <a class="card" href="hub.html">
-      <div class="tag">02 · LANDING · HUB</div>
-      <h3>Long-haul Freight into Central Asia</h3>
-      <p>Flagship hub page. Hero with live route atlas, 20-corridor grid, three physical routes explained, instant rate indicator, trust data, case studies, customs expertise, quote form.</p>
-      <div class="foot"><span>Desktop · 1440px</span><span class="go">OPEN →</span></div>
-    </a>
-    <a class="card" href="india-uzbekistan.html">
-      <div class="tag">03 · LANDING · CHILD</div>
-      <h3>India → Uzbekistan corridor page</h3>
-      <p>Example corridor child. Route diagram (Mundra → Bandar Abbas → Tashkent), rate band by mode, three routing options, customs docs by jurisdiction, cargo composition, case study, pre-filled quote form.</p>
-      <div class="foot"><span>Desktop · 1440px</span><span class="go">OPEN →</span></div>
-    </a>
-    <a class="card" href="exec-summary.html">
-      <div class="tag">04 · LEAVE-BEHIND</div>
-      <h3>One-page executive summary</h3>
-      <p>Print-ready A4. Headline number, funnel, 20-corridor list, phasing, cost of delay, the ask. Dense and confident. Designed for the CEO to keep on his desk after the meeting.</p>
-      <div class="foot"><span>A4 · print optimised</span><span class="go">OPEN →</span></div>
-    </a>
-    <a class="card" href="pitcher-notes.html" style="grid-column: 1 / -1; border-color: var(--warm);">
-      <div class="tag" style="color: var(--warm);">05 · INTERNAL · PITCHER'S NOTES</div>
-      <h3>How to run this meeting</h3>
-      <p>Slide-by-slide talking points. Numbers to challenge gently. What to push back on if he tries to scope-reduce. What to give up if he pushes. The close line to memorise.</p>
-      <div class="foot"><span>Internal only — not for the CEO</span><span class="go">OPEN →</span></div>
-    </a>
-  </div>
-
-  <h2 class="sec">◆ RECOMMENDED READING ORDER</h2>
-  <div style="font-family: var(--mono); font-size: 14px; color: var(--text-2); line-height: 2;">
-    01 — Read <a href="pitcher-notes.html" style="color: var(--cyan);">pitcher-notes.html</a> first (internal orientation)<br>
-    02 — Run through <a href="deck.html" style="color: var(--cyan);">deck.html</a> end-to-end; stop on slide 8 and play with the sliders<br>
-    03 — Open <a href="hub.html" style="color: var(--cyan);">hub.html</a> + <a href="india-uzbekistan.html" style="color: var(--cyan);">india-uzbekistan.html</a> in browser tabs before the meeting for the slide-11 reveal<br>
-    04 — Print <a href="exec-summary.html" style="color: var(--cyan);">exec-summary.html</a> and bring one copy per attendee
+<!-- ———————————— header ———————————— -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="phone"><span class="flag" aria-hidden="true"></span>+371 25 663 689</span>
+    <a class="write" href="mailto:ah@lazarus.lv"><span data-i18n="topbar.write">Напишите нам</span></a>
+    <span class="spacer"></span>
+    <a class="cta-small" href="#calc" data-i18n="topbar.cta">Рассчитайте стоимость</a>
   </div>
 </div>
+
+<header class="mainbar">
+  <div class="mainbar-inner">
+    <nav class="nav-primary" aria-label="primary">
+      <a href="#deliverables" data-i18n="nav.overview">Обзор</a>
+      <a href="deck.html" data-i18n="nav.deck">Презентация</a>
+      <a href="hub.html" data-i18n="nav.landings">Лендинги</a>
+      <a href="exec-summary.html" data-i18n="nav.summary">Резюме</a>
+    </nav>
+    <div class="brand-wrap">
+      <div class="brand">LAZARUS</div>
+      <div class="brand-sub" data-i18n="brand.sub">Логистическая транспортная компания</div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; align-items:center; gap:12px;">
+      <div class="lang-switch" data-lang-trigger role="button" tabindex="0">
+        <img class="flag" data-lang-flag src="https://flagcdn.com/ru.svg" alt="RU">
+        <span data-lang-label>RU</span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="lang-menu" data-lang-menu>
+        <button data-lang-option="ru"><img class="flag" src="https://flagcdn.com/ru.svg" alt=""><span data-i18n="lang.ru">Русский</span></button>
+        <button data-lang-option="en"><img class="flag" src="https://flagcdn.com/gb.svg" alt=""><span data-i18n="lang.en">English</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="subnav" aria-label="services">
+  <div class="subnav-inner">
+    <a href="hub.html" data-i18n="footer.link_auto">Автоперевозки</a>
+    <a href="hub.html" data-i18n="footer.link_ltl">Сборные грузы (LTL)</a>
+    <a href="hub.html" data-i18n="footer.link_sea">Морские перевозки</a>
+    <a href="hub.html" data-i18n="footer.link_air">Авиаперевозки</a>
+    <a href="hub.html" data-i18n="footer.link_rail">Ж/Д перевозки</a>
+    <a href="india-uzbekistan.html" data-i18n="nav.landings">Лендинги</a>
+  </div>
+</nav>
+
+<!-- ———————————— hero ———————————— -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="stat-inline"><span class="dot"></span><span data-i18n="hero.badge">LAZARUS · Стратегический пакет · Апрель 2026</span></div>
+      <h1>
+        <span data-i18n="hero.title_prefix">Коридор стоимостью</span>
+        <span class="num" data-i18n="hero.title_num">€100–350 тыс.</span>
+        <span data-i18n="hero.title_suffix">— это реальная возможность</span>
+      </h1>
+      <p class="lede" data-i18n="hero.lede">Комплексный пакет: 12-слайдовая презентация с живой финансовой моделью, два прототипа лендинговых страниц, печатное резюме и внутренние заметки для спикера.</p>
+    </div>
+    <a class="circle-cta" href="deck.html#slide-8" data-i18n="hero.cta">Рассчитать маржу</a>
+  </div>
+</section>
+
+<!-- ———————————— stats strip ———————————— -->
+<section class="statstrip">
+  <div class="statstrip-inner">
+    <div class="item"><span class="check">✓</span><span data-i18n="stats.s1">Маржа 1-го года (консервативно): €103 тыс.</span></div>
+    <div class="item"><span class="check">✓</span><span data-i18n="stats.s2">Маржа 1-го года (реалистично): €352 тыс.</span></div>
+    <div class="item"><span class="check">✓</span><span data-i18n="stats.s3">Фаза 1: €22 тыс. · 8 недель</span></div>
+  </div>
+</section>
+
+<!-- ———————————— deliverables ———————————— -->
+<section class="section" id="deliverables">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="deliverables.eyebrow">◆ Структура пакета</p>
+    <h2 data-i18n="deliverables.title">Что входит в пакет</h2>
+    <p class="lede" data-i18n="deliverables.lede">Пять связанных документов. Каждый рассчитан на свою аудиторию и свой момент во встрече.</p>
+
+    <div class="cards">
+      <a class="card" href="deck.html">
+        <div class="tag" data-i18n="deliverables.d1_tag">01 · Презентация</div>
+        <h3 data-i18n="deliverables.d1_title">12-слайдовая презентация для CEO</h3>
+        <p data-i18n="deliverables.d1_desc">Смысловой каркас. Открытие словами коммерческого директора, рост рынка, воронка, живой калькулятор.</p>
+        <div class="foot">
+          <span data-i18n="deliverables.d1_meta">16:9 · 1920×1080</span>
+          <span class="go" data-i18n="deliverables.open">Открыть →</span>
+        </div>
+      </a>
+      <a class="card" href="hub.html">
+        <div class="tag" data-i18n="deliverables.d2_tag">02 · Лендинг · Хаб</div>
+        <h3 data-i18n="deliverables.d2_title">Долгие перевозки в Центральную Азию</h3>
+        <p data-i18n="deliverables.d2_desc">Флагманская страница-хаб. Атлас маршрутов, сетка из 20 коридоров, мгновенный индикатор тарифа, кейсы.</p>
+        <div class="foot">
+          <span data-i18n="deliverables.d2_meta">Десктоп · 1440px</span>
+          <span class="go" data-i18n="deliverables.open">Открыть →</span>
+        </div>
+      </a>
+      <a class="card" href="india-uzbekistan.html">
+        <div class="tag" data-i18n="deliverables.d3_tag">03 · Лендинг · Дочерний</div>
+        <h3 data-i18n="deliverables.d3_title">Страница коридора Индия → Узбекистан</h3>
+        <p data-i18n="deliverables.d3_desc">Схема маршрута (Мундра → Бандар-Аббас → Ташкент), диапазон тарифов, варианты маршрутизации.</p>
+        <div class="foot">
+          <span data-i18n="deliverables.d3_meta">Десктоп · 1440px</span>
+          <span class="go" data-i18n="deliverables.open">Открыть →</span>
+        </div>
+      </a>
+      <a class="card" href="exec-summary.html">
+        <div class="tag" data-i18n="deliverables.d4_tag">04 · Раздаточный материал</div>
+        <h3 data-i18n="deliverables.d4_title">Резюме на одной странице</h3>
+        <p data-i18n="deliverables.d4_desc">A4 для печати. Главная цифра, воронка, 20 коридоров, фазирование, цена промедления.</p>
+        <div class="foot">
+          <span data-i18n="deliverables.d4_meta">A4 · оптимизировано для печати</span>
+          <span class="go" data-i18n="deliverables.open">Открыть →</span>
+        </div>
+      </a>
+      <a class="card full" href="pitcher-notes.html">
+        <div class="tag" data-i18n="deliverables.d5_tag">05 · Внутреннее · Заметки спикера</div>
+        <h3 data-i18n="deliverables.d5_title">Как провести эту встречу</h3>
+        <p data-i18n="deliverables.d5_desc">Тезисы по каждому слайду, цифры для защиты, реакция на попытки урезать скоуп, финальная фраза.</p>
+        <div class="foot">
+          <span data-i18n="deliverables.d5_meta">Только для внутреннего использования</span>
+          <span class="go" data-i18n="deliverables.open">Открыть →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ———————————— reading order ———————————— -->
+<section class="reading">
+  <div class="wrap">
+    <h2 data-i18n="reading.title">◆ Рекомендуемый порядок чтения</h2>
+    <ol>
+      <li data-i18n="reading.i1" data-i18n-html>Прочтите <a href="pitcher-notes.html">заметки спикера</a> первыми — это внутренний ориентир.</li>
+      <li data-i18n="reading.i2" data-i18n-html>Пройдите <a href="deck.html">презентацию</a> от начала до конца; остановитесь на слайде 8 и поиграйте с ползунками.</li>
+      <li data-i18n="reading.i3" data-i18n-html>Откройте <a href="hub.html">hub.html</a> и <a href="india-uzbekistan.html">india-uzbekistan.html</a> во вкладках перед встречей.</li>
+      <li data-i18n="reading.i4" data-i18n-html>Распечатайте <a href="exec-summary.html">резюме</a> — по одной копии на каждого участника.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ———————————— footer ———————————— -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand">LAZARUS</div>
+      <div class="brand-sub" data-i18n="footer.brand_sub">Стратегический пакет</div>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h4 data-i18n="footer.col1">Перевозки</h4>
+        <ul>
+          <li><a href="hub.html" data-i18n="footer.link_auto">Автоперевозки</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_ltl">Сборные грузы (LTL)</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_sea">Морские перевозки</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_air">Авиаперевозки</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_rail">Железнодорожные перевозки</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_multi">Мультимодальные перевозки</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_project">Проектные, негабаритные</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.col2">Услуги</h4>
+        <ul>
+          <li><a href="hub.html" data-i18n="footer.link_warehouse">Складские услуги</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_insurance">Страхование грузов</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_danger">Перевозка опасных грузов</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_temp">Температурные режимы</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_bulk">Сыпучие грузы</a></li>
+          <li><a href="hub.html" data-i18n="footer.link_liquid">Наливные грузы</a></li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h4 data-i18n="footer.col3">Свяжитесь с нами</h4>
+        <p><strong data-i18n="footer.email_sales">Почта отдела продаж</strong><a href="mailto:ah@lazarus.lv">ah@lazarus.lv</a></p>
+        <p><strong data-i18n="footer.email_support">Почта отдела обслуживания</strong><a href="mailto:aj@lazarus.lv">aj@lazarus.lv</a></p>
+        <p><strong data-i18n="footer.phone">Номер телефона</strong><a href="tel:+37125663689">+371 25 663 689</a></p>
+      </div>
+      <div class="contact">
+        <h4 data-i18n="footer.col4">Наш адрес</h4>
+        <p><strong data-i18n="footer.address_actual">Фактический адрес</strong>Katlakalna 9a, Rīga, LV-1073</p>
+        <p><strong data-i18n="footer.address_legal">Юридический адрес</strong>Katlakalna 9a, Rīga, LV-1073</p>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span data-i18n="footer.legal">© 2026 Lazarus. Все права защищены.</span>
+      <span>Rīga, Latvia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- floating social rail -->
+<div class="float-social">
+  <a href="https://t.me/lazarus" title="Telegram" aria-label="Telegram">✈</a>
+  <a href="https://wa.me/37125663689" title="WhatsApp" aria-label="WhatsApp">☏</a>
+  <a href="viber://chat?number=+37125663689" title="Viber" aria-label="Viber">◉</a>
+</div>
+
+<script src="i18n.js"></script>
 </body>
 </html>
