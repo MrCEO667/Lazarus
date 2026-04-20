@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Lazarus · Freight from India to Uzbekistan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  body { background: var(--bg); }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 64px; }
+
+  header.nav { position: sticky; top: 0; z-index: 40; background: rgba(11,25,41,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  header.nav .inner { display:flex; align-items: center; gap: 40px; padding: 18px 64px; max-width: 1440px; margin: 0 auto;}
+  .logo { display:flex; align-items:center; gap: 14px; font-family: var(--display); font-weight: 800; font-size: 22px;}
+  .logo .mark { width: 32px; height: 32px; border: 1.5px solid var(--cyan); display:flex; align-items:center; justify-content:center; color: var(--cyan);}
+  nav.primary { display:flex; gap: 28px; font-size: 15px; color: var(--text-2);}
+  nav.primary a { color: inherit; text-decoration: none;}
+  nav.primary a.current { color: var(--cyan);}
+  .lang { margin-left: auto; display:flex; gap: 2px; font-family: var(--mono); font-size: 12px; color: var(--text-3);}
+  .lang span { padding: 4px 8px;}
+  .lang .active { background: var(--surface-2); color: var(--text);}
+  .btn-primary { padding: 12px 22px; background: var(--warm); color: #1a0b05; font-family: var(--display); font-weight: 700; border: 0; cursor: pointer;}
+  .btn-ghost { padding: 12px 22px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font-family: var(--display); font-weight: 600; cursor: pointer;}
+
+  /* Breadcrumb */
+  .crumbs { padding: 14px 0; font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.12em; border-bottom: 1px solid var(--line);}
+  .crumbs a { color: var(--text-3); text-decoration: none;}
+  .crumbs .sep { color: var(--line-2); margin: 0 10px;}
+  .crumbs .here { color: var(--cyan);}
+
+  /* Hero */
+  .hero { display:grid; grid-template-columns: 5fr 7fr; min-height: 720px; border-bottom: 1px solid var(--line);}
+  .hero .l { padding: 64px 0 64px 64px; display:flex; flex-direction: column; justify-content: center;}
+  .hero .r { background: #0A1423; border-left: 1px solid var(--line); position: relative; padding: 32px;}
+  .eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: 0.18em; color: var(--cyan); text-transform: uppercase;}
+  h1 { font-family: var(--display); font-weight: 800; font-size: 88px; line-height: 0.96; letter-spacing: -0.02em; margin: 20px 0 0;}
+  .flags { display:flex; align-items:center; gap: 18px; font-family: var(--display); font-size: 24px; color: var(--text-2); margin-top: 24px;}
+  .flags .ar { color: var(--cyan); font-family: var(--mono);}
+  .hero .kpis { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px;}
+  .kpi { padding: 20px; background: var(--surface); border: 1px solid var(--line);}
+  .kpi .k { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.14em;}
+  .kpi .v { font-family: var(--display); font-weight: 700; font-size: 32px; letter-spacing: -0.01em; margin-top: 6px;}
+  .kpi .v span { color: var(--text-3); font-size: 16px; font-weight: 500;}
+  .cta-row { margin-top: 36px; display:flex; gap: 14px;}
+
+  /* Route diagram */
+  .routemap { background: var(--surface); border: 1px solid var(--line); height: 100%; padding: 28px; display:flex; flex-direction: column;}
+  .routemap .head { display:flex; justify-content:space-between; font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.14em;}
+  .routemap svg { flex:1; width: 100%;}
+
+  /* Rate band section */
+  .rate-band { background: #0A1423; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);}
+  .rate-band .inner { max-width: 1440px; margin: 0 auto; padding: 56px 64px; display:grid; grid-template-columns: 2fr 3fr 2fr; gap: 48px; align-items: center;}
+  .rate-big { font-family: var(--display); font-weight: 800; font-size: 92px; line-height: 1; letter-spacing: -0.02em; color: var(--cyan);}
+  .rate-lbl { font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.16em; margin-bottom: 14px;}
+  .rate-rows { display:flex; flex-direction: column; gap: 10px;}
+  .rate-rows .r { display:flex; justify-content: space-between; font-family: var(--mono); font-size: 14px; padding: 10px 0; border-bottom: 1px dashed var(--line); color: var(--text-2);}
+  .rate-rows .r b { color: var(--text); font-weight: 500;}
+
+  /* Generic section */
+  section.block { padding: 96px 0; border-bottom: 1px solid var(--line);}
+  .sh { display:flex; justify-content:space-between; align-items: flex-end; margin-bottom: 40px;}
+  .sh h2 { font-family: var(--display); font-size: 52px; margin: 0; line-height: 1.02; letter-spacing: -0.02em; max-width: 900px;}
+  .idx { font-family: var(--mono); font-size: 13px; letter-spacing: 0.18em; color: var(--text-3);}
+
+  /* 3 route options */
+  .opts { display:grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line);}
+  .opt { background: var(--bg); padding: 32px; display:flex; flex-direction: column; gap: 18px;}
+  .opt.recommended { background: var(--surface); border-left: 3px solid var(--green); padding-left: 29px;}
+  .opt .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--cyan);}
+  .opt.recommended .tag { color: var(--green);}
+  .opt h3 { font-family: var(--display); font-size: 26px; margin: 0; line-height: 1.1;}
+  .opt .path {
+    background: #0A1423; border: 1px solid var(--line); padding: 14px 16px;
+    font-family: var(--mono); font-size: 13px; line-height: 1.7; color: var(--text-2);
+  }
+  .opt .path .arrow { color: var(--cyan);}
+  .opt .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 10px;}
+  .opt .cell { background: #0A1423; border: 1px solid var(--line); padding: 12px 14px;}
+  .opt .cell .k { font-family: var(--mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.14em;}
+  .opt .cell .v { font-family: var(--display); font-weight: 700; font-size: 22px; margin-top: 4px; letter-spacing: -0.01em;}
+  .opt .pro, .opt .con { font-size: 14px; color: var(--text-2); line-height: 1.5;}
+  .opt .pro::before { content: "+ "; color: var(--green); font-weight: 700;}
+  .opt .con::before { content: "− "; color: var(--warm); font-weight: 700;}
+
+  /* Docs */
+  .docs { display:grid; grid-template-columns: repeat(2, 1fr); gap: 48px;}
+  .doc-list { display:flex; flex-direction: column; gap: 2px;}
+  .doc-list .row { padding: 16px 20px; background: var(--surface); display:flex; gap: 18px; align-items: center; font-size: 15px;}
+  .doc-list .row .n { font-family: var(--mono); color: var(--text-3); font-size: 12px; min-width: 28px; letter-spacing: 0.1em;}
+  .doc-list .row .d { flex: 1; color: var(--text);}
+  .doc-list .row .side { font-family: var(--mono); font-size: 11px; color: var(--cyan); letter-spacing: 0.14em;}
+  .doc-list .row .side.dest { color: var(--green);}
+  .doc-list .row .side.transit { color: var(--amber);}
+
+  /* Cargo types */
+  .cargo-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--line); border: 1px solid var(--line);}
+  .cg { background: var(--bg); padding: 28px; min-height: 200px; display:flex; flex-direction: column; gap: 10px;}
+  .cg .k { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.14em;}
+  .cg h4 { font-family: var(--display); font-size: 22px; margin: 4px 0 0;}
+  .cg .share { font-family: var(--mono); font-size: 12px; color: var(--cyan);}
+  .cg .bar { height: 6px; background: var(--surface-2); position: relative; overflow: hidden;}
+  .cg .bar::before { content: ""; position: absolute; inset: 0 var(--rest) 0 0; background: var(--cyan); opacity: 0.6;}
+  .cg .note { color: var(--text-2); font-size: 14px; line-height: 1.5; margin-top: auto;}
+
+  /* Case */
+  .case-row { display:grid; grid-template-columns: 5fr 7fr; gap: 32px; border: 1px solid var(--line);}
+  .case-img {
+    background-image:
+      repeating-linear-gradient(45deg, rgba(0,212,255,0.04) 0 12px, transparent 12px 24px),
+      linear-gradient(135deg, #1E3A5F 0%, #0A1423 100%);
+    min-height: 460px; padding: 28px; position: relative; display:flex; align-items: flex-end;
+  }
+  .case-img .ph { position:absolute; top: 28px; left: 28px; right: 28px; font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.65;}
+  .case-img .tag { font-family: var(--mono); font-size: 11px; background: rgba(11,25,41,0.75); padding: 6px 10px; color: var(--green);}
+  .case-body { padding: 40px;}
+  .case-body h3 { font-family: var(--display); font-size: 36px; margin: 10px 0 12px; line-height: 1.08;}
+  .case-body .route-line { font-family: var(--mono); font-size: 12px; color: var(--cyan); letter-spacing: 0.14em;}
+  .case-body p { color: var(--text-2); font-size: 16px; line-height: 1.6;}
+  .case-stats { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px;}
+  .case-stats .s { padding: 16px 18px; background: var(--surface); border: 1px solid var(--line);}
+  .case-stats .s .k { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.14em;}
+  .case-stats .s .v { font-family: var(--display); font-weight: 700; font-size: 24px; margin-top: 4px;}
+
+  /* Quote form */
+  .qf { display:grid; grid-template-columns: 5fr 7fr; gap: 56px;}
+  .qf .left .idx { color: var(--cyan);}
+  .qf .left h2 { font-family: var(--display); font-size: 48px; line-height: 1.04; letter-spacing: -0.02em; margin: 14px 0 16px;}
+  .qf .left p { color: var(--text-2); font-size: 16px; line-height: 1.55;}
+  .locked-fields { display:flex; gap: 10px; margin-top: 28px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;}
+  .locked-fields .lf { padding: 8px 14px; border: 1px solid var(--cyan); color: var(--cyan);}
+  .locked-fields .lf b { color: var(--text);}
+  .form { display:grid; grid-template-columns: 1fr 1fr; gap: 14px;}
+  .form .field { display:flex; flex-direction: column; gap: 6px;}
+  .form label { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.14em;}
+  .form input, .form select, .form textarea {
+    background: #0A1423; border: 1px solid var(--line-2); color: var(--text); padding: 12px 14px;
+    font-size: 15px; outline: none; font-family: var(--sans);
+  }
+  .form input:disabled { color: var(--cyan); background: rgba(0,212,255,0.05);}
+  .form .full { grid-column: 1 / -1;}
+  .form .submit { grid-column: 1 / -1; padding: 16px; background: var(--warm); color: #1a0b05; border: 0; font-family: var(--display); font-weight: 700; font-size: 16px; cursor: pointer;}
+
+  /* Related */
+  .related { display:grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line);}
+  .rel { background: var(--bg); padding: 28px; display:flex; flex-direction: column; gap: 10px; cursor: pointer;}
+  .rel:hover { background: var(--surface);}
+  .rel .route { font-family: var(--mono); color: var(--text-3); font-size: 12px; letter-spacing: 0.14em;}
+  .rel h4 { font-family: var(--display); font-size: 24px; margin: 0;}
+  .rel h4 .ar { color: var(--cyan);}
+  .rel .meta { font-family: var(--mono); font-size: 12px; color: var(--text-2); margin-top: auto; display:flex; gap: 20px; padding-top: 16px; border-top: 1px solid var(--line);}
+
+  footer { padding: 56px 64px 40px; background: #08111E; border-top: 1px solid var(--line); color: var(--text-3);}
+  footer .meta { max-width: 1440px; margin: 0 auto; display:flex; justify-content:space-between; font-family: var(--mono); font-size: 12px;}
+
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="inner">
+    <div class="logo"><span class="mark">L</span>LAZARUS</div>
+    <nav class="primary">
+      <a href="hub.html" class="current">Corridors</a>
+      <a href="#">Services</a>
+      <a href="#">Rate calculator</a>
+      <a href="#">Case studies</a>
+      <a href="#">About</a>
+    </nav>
+    <div class="lang"><span class="active">EN</span><span>RU</span><span>LV</span><span>KZ</span></div>
+    <button class="btn-primary">Get a rate →</button>
+  </div>
+</header>
+
+<div class="crumbs"><div class="wrap"><a href="hub.html">Corridors</a><span class="sep">→</span><a href="hub.html">From India</a><span class="sep">→</span><span class="here">India → Uzbekistan</span></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="l">
+    <div class="eyebrow">◆ Corridor · IN → UZ · Flagship</div>
+    <h1>Freight from India<br>to Uzbekistan.</h1>
+    <div class="flags"><span>🇮🇳 India</span><span class="ar">→</span><span>🇺🇿 Uzbekistan</span><span style="margin-left: 20px; color: var(--text-3); font-family: var(--mono); font-size: 13px;">DOOR-TO-DOOR · MULTIMODAL</span></div>
+    <div class="kpis">
+      <div class="kpi"><div class="k">TRANSIT · DOOR TO DOOR</div><div class="v">28–35<span> days</span></div></div>
+      <div class="kpi"><div class="k">PRIMARY ROUTE</div><div class="v">Bandar<span> Abbas</span></div></div>
+      <div class="kpi"><div class="k">CARGO VALUE MOVED</div><div class="v">€2.1M<span> in 2024</span></div></div>
+    </div>
+    <div class="cta-row">
+      <button class="btn-primary">See indicative rate ↓</button>
+      <button class="btn-ghost">Request exact quote</button>
+    </div>
+  </div>
+  <div class="r">
+    <div class="routemap">
+      <div class="head"><span>◆ ROUTE DIAGRAM · PRIMARY CORRIDOR</span><span style="color: var(--green);">● ACTIVE</span></div>
+      <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="margin-top: 18px;">
+        <defs>
+          <pattern id="gp2" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#14304d" stroke-width="0.5"/></pattern>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#00D4FF"/></marker>
+        </defs>
+        <rect width="800" height="500" fill="url(#gp2)"/>
+
+        <!-- Coastline stylization -->
+        <path d="M 0 360 Q 200 340 380 300 T 800 240" stroke="#1E3A5F" stroke-width="2" fill="none" opacity="0.5"/>
+
+        <!-- Nodes on the primary route -->
+        <g font-family="JetBrains Mono" font-size="12" fill="#F5F7FA">
+          <!-- Mundra / Mumbai -->
+          <circle cx="150" cy="360" r="8" fill="#FF6B3D"/>
+          <text x="150" y="390" text-anchor="middle" fill="#B8C5DB" font-size="11">MUNDRA · IN</text>
+          <text x="150" y="405" text-anchor="middle" fill="#8B9DC3" font-size="10">ORIGIN PORT</text>
+
+          <!-- Bandar Abbas -->
+          <circle cx="340" cy="310" r="8" fill="#00D4FF"/>
+          <text x="340" y="290" text-anchor="middle" fill="#F5F7FA" font-size="11">BANDAR ABBAS · IR</text>
+          <text x="340" y="337" text-anchor="middle" fill="#8B9DC3" font-size="10">TRANSHIPMENT · D7–10</text>
+
+          <!-- Sarakhs -->
+          <circle cx="520" cy="230" r="8" fill="#00D4FF"/>
+          <text x="520" y="210" text-anchor="middle" fill="#F5F7FA" font-size="11">SARAKHS · IR/TM</text>
+          <text x="520" y="257" text-anchor="middle" fill="#8B9DC3" font-size="10">RAIL HANDOVER · D18</text>
+
+          <!-- Tashkent -->
+          <circle cx="680" cy="160" r="10" fill="#00FF88"/>
+          <text x="680" y="140" text-anchor="middle" fill="#F5F7FA" font-size="12" font-weight="600">TASHKENT · UZ</text>
+          <text x="680" y="187" text-anchor="middle" fill="#8B9DC3" font-size="10">FINAL DELIVERY · D28–35</text>
+        </g>
+
+        <!-- Path segments -->
+        <g fill="none" stroke-width="2">
+          <path d="M 150 360 Q 230 330 340 310" stroke="#00D4FF" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+          <path d="M 340 310 Q 440 280 520 230" stroke="#00D4FF" marker-end="url(#arr)"/>
+          <path d="M 520 230 Q 600 200 680 160" stroke="#00FF88" marker-end="url(#arr)"/>
+        </g>
+
+        <!-- Legs labels -->
+        <g font-family="JetBrains Mono" font-size="10" fill="#00D4FF">
+          <text x="245" y="318" text-anchor="middle">SEA · 2,100 km</text>
+          <text x="430" y="258" text-anchor="middle">IRAN TRANSIT · 1,500 km</text>
+          <text x="600" y="188" text-anchor="middle">UZ RAIL · 800 km</text>
+        </g>
+
+        <!-- Progress marker -->
+        <circle cx="440" cy="280" r="5" fill="#00FF88"><animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/></circle>
+        <text x="440" y="266" text-anchor="middle" fill="#00FF88" font-family="JetBrains Mono" font-size="10">Live: LZR-24178 · D21</text>
+      </svg>
+      <div style="display:flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.12em; border-top: 1px solid var(--line); padding-top: 14px;">
+        <span>◆ 3 LEGS · 4,400 KM · 4 CUSTOMS TOUCHPOINTS</span><span>UPDATED · APR 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATE BAND -->
+<section class="rate-band">
+  <div class="inner">
+    <div>
+      <div class="rate-lbl">CURRENT INDICATIVE RATES</div>
+      <div class="rate-big">€3.8K <span style="color: var(--text-3); font-size: 48px;">–</span> €5.2K</div>
+      <div style="font-family: var(--mono); font-size: 13px; color: var(--text-2); margin-top: 12px;">1 × 20ft FCL · door-to-door · 28–35 days</div>
+    </div>
+    <div class="rate-rows">
+      <div class="r"><span>20ft FCL · door-to-door</span><b>€3,800 – €5,200</b></div>
+      <div class="r"><span>40ft FCL / HC · door-to-door</span><b>€5,400 – €7,200</b></div>
+      <div class="r"><span>LCL / groupage (per CBM)</span><b>€60 – €90 / CBM</b></div>
+      <div class="r"><span>Reefer 20ft (frozen/chilled)</span><b>€5,600 – €7,400</b></div>
+      <div class="r"><span>Air freight (per kg)</span><b>€4.20 – €6.50 / kg</b></div>
+      <div class="r"><span>Project / oversized</span><b>Request quote</b></div>
+    </div>
+    <div>
+      <div class="rate-lbl">RATES INCLUDE</div>
+      <ul style="padding-left: 18px; color: var(--text-2); font-size: 14px; line-height: 1.65; margin: 12px 0 0;">
+        <li>Origin pickup + export customs</li>
+        <li>Ocean / rail freight</li>
+        <li>Iran transit declaration + handling</li>
+        <li>Uzbek import customs + T-1 filing</li>
+        <li>Final delivery to consignee</li>
+      </ul>
+      <div style="margin-top: 16px; font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.1em;">◆ BANDS REFRESHED MONTHLY FROM SETTLED LANE DATA</div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE ROUTE OPTIONS -->
+<section class="block">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="idx">02 · ROUTE OPTIONS</div>
+        <h2 style="margin-top: 10px;">Three ways to run this corridor. Choose by priority.</h2>
+      </div>
+    </div>
+    <div class="opts">
+      <div class="opt recommended">
+        <div class="tag">◆ RECOMMENDED · 82% OF SHIPMENTS</div>
+        <h3>Sea + Rail via Bandar Abbas</h3>
+        <div class="path">
+          <span>Mundra / Mumbai</span><br><span class="arrow">→</span> Bandar Abbas (sea)<br><span class="arrow">→</span> Sarakhs (Iran rail)<br><span class="arrow">→</span> Tashkent · Samarkand · Bukhara
+        </div>
+        <div class="grid2">
+          <div class="cell"><div class="k">TRANSIT</div><div class="v">28–35 d</div></div>
+          <div class="cell"><div class="k">COST</div><div class="v">€3.8–5.2K</div></div>
+        </div>
+        <div class="pro">Fastest economical route. Best for FCL & LCL. ADR-compatible.</div>
+        <div class="con">Iran transit documentation required — we handle it.</div>
+      </div>
+      <div class="opt">
+        <div class="tag">◆ CASPIAN ROUTING</div>
+        <h3>Sea + Rail via Caspian</h3>
+        <div class="path">
+          <span>Mundra / Chennai</span><br><span class="arrow">→</span> Jebel Ali / Poti (sea)<br><span class="arrow">→</span> Baku / Aktau (Caspian)<br><span class="arrow">→</span> Tashkent
+        </div>
+        <div class="grid2">
+          <div class="cell"><div class="k">TRANSIT</div><div class="v">38–48 d</div></div>
+          <div class="cell"><div class="k">COST</div><div class="v">€4.8–6.4K</div></div>
+        </div>
+        <div class="pro">Avoids Iran transit. Useful for sanctioned cargo types.</div>
+        <div class="con">Longer and ~25% more expensive. Caspian ferry capacity variable.</div>
+      </div>
+      <div class="opt">
+        <div class="tag">◆ URGENT & HIGH-VALUE</div>
+        <h3>Air Direct</h3>
+        <div class="path">
+          <span>Delhi / Mumbai / Bangalore</span><br><span class="arrow">→</span> Tashkent International (TAS)<br><small style="color: var(--text-3);">Scheduled & charter options.</small>
+        </div>
+        <div class="grid2">
+          <div class="cell"><div class="k">TRANSIT</div><div class="v">3–5 d</div></div>
+          <div class="cell"><div class="k">COST</div><div class="v">€4.2–6.5/kg</div></div>
+        </div>
+        <div class="pro">Pharma, electronics, temp-sensitive. Full cold-chain on request.</div>
+        <div class="con">10–15× sea+rail cost. Only justifies on urgency or high unit value.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMS & DOCS -->
+<section class="block" style="background: #0A1423;">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="idx">03 · CUSTOMS & DOCUMENTATION</div>
+        <h2 style="margin-top: 10px;">One filing to us. We handle three jurisdictions.</h2>
+      </div>
+    </div>
+    <div class="docs">
+      <div>
+        <div class="idx" style="color: var(--cyan); margin-bottom: 16px;">◆ INDIA EXPORT SIDE</div>
+        <div class="doc-list">
+          <div class="row"><span class="n">01</span><span class="d">IEC (Importer Exporter Code) verification</span><span class="side">ORIGIN</span></div>
+          <div class="row"><span class="n">02</span><span class="d">Shipping bill (export declaration)</span><span class="side">ORIGIN</span></div>
+          <div class="row"><span class="n">03</span><span class="d">Commercial invoice + packing list</span><span class="side">ORIGIN</span></div>
+          <div class="row"><span class="n">04</span><span class="d">Bill of Lading (Mundra / Chennai)</span><span class="side">ORIGIN</span></div>
+          <div class="row"><span class="n">05</span><span class="d">Certificate of Origin (non-preferential / GSP)</span><span class="side">ORIGIN</span></div>
+          <div class="row"><span class="n">06</span><span class="d">Phytosanitary / fumigation (where applicable)</span><span class="side">ORIGIN</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="idx" style="color: var(--amber); margin-bottom: 16px;">◆ IRAN TRANSIT + UZBEKISTAN IMPORT</div>
+        <div class="doc-list">
+          <div class="row"><span class="n">07</span><span class="d">Iran transit declaration (T-1 equivalent)</span><span class="side transit">TRANSIT</span></div>
+          <div class="row"><span class="n">08</span><span class="d">CMR / rail waybill (Bandar → Sarakhs)</span><span class="side transit">TRANSIT</span></div>
+          <div class="row"><span class="n">09</span><span class="d">Uzbek import customs declaration (CCD)</span><span class="side dest">UZ IMPORT</span></div>
+          <div class="row"><span class="n">10</span><span class="d">VAT + duty filing (Uzbek tariff code)</span><span class="side dest">UZ IMPORT</span></div>
+          <div class="row"><span class="n">11</span><span class="d">Conformity certificate (where required)</span><span class="side dest">UZ IMPORT</span></div>
+          <div class="row"><span class="n">12</span><span class="d">Uzbek rail waybill (Sarakhs → Tashkent)</span><span class="side dest">UZ IMPORT</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 40px; padding: 32px; background: var(--surface-2); border: 1px solid var(--cyan); display:flex; justify-content:space-between; align-items: center; gap: 32px;">
+      <div>
+        <div class="idx" style="color: var(--cyan);">◆ TYPICAL TOTAL CLEARANCE TIME</div>
+        <div style="font-family: var(--display); font-weight: 700; font-size: 36px; margin-top: 10px;">6–9 days across all three jurisdictions</div>
+      </div>
+      <div style="font-family: var(--mono); font-size: 14px; color: var(--text-2); max-width: 400px;">Licensed broker at origin (Mumbai), transit (Tehran office), and destination (Tashkent). You file once, in English or Russian.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARGO TYPES -->
+<section class="block">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="idx">04 · WHAT WE HANDLE ON THIS LANE</div>
+        <h2 style="margin-top: 10px;">What Uzbekistan actually buys from India.</h2>
+      </div>
+      <div class="idx">2024 IMPORT COMPOSITION · UZ STAT COMMITTEE</div>
+    </div>
+    <div class="cargo-grid">
+      <div class="cg"><div class="k">#1 · BY VOLUME</div><h4>Pharmaceuticals</h4><div class="share">~34% of IN→UZ imports</div><div class="bar" style="--rest: 66%;"></div><div class="note">Temperature-controlled transport, batch tracking, cold-chain audit trail on request.</div></div>
+      <div class="cg"><div class="k">#2</div><h4>Textiles & garments</h4><div class="share">~18%</div><div class="bar" style="--rest: 82%;"></div><div class="note">FCL and LCL. Handling from Tirupur, Ahmedabad, Delhi consolidation centres.</div></div>
+      <div class="cg"><div class="k">#3</div><h4>Machinery & components</h4><div class="share">~16%</div><div class="bar" style="--rest: 84%;"></div><div class="note">Industrial equipment, automotive parts, power & textile machinery. Oversized capable.</div></div>
+      <div class="cg"><div class="k">#4</div><h4>Chemicals & plastics</h4><div class="share">~12%</div><div class="bar" style="--rest: 88%;"></div><div class="note">ADR-compliant where applicable. ISO tanks and flexitanks available.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE -->
+<section class="block" style="background: #0A1423;">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="idx">05 · CASE STUDY · IN → UZ</div>
+        <h2 style="margin-top: 10px;">A recent shipment on this exact lane.</h2>
+      </div>
+    </div>
+    <div class="case-row">
+      <div class="case-img">
+        <div class="ph">PROJECT PHOTO · CONTAINER STACK AT MUNDRA TERMINAL · CLIENT APPROVED</div>
+        <div class="tag">● DELIVERED ON SCHEDULE</div>
+      </div>
+      <div class="case-body">
+        <div class="route-line">MUMBAI → BANDAR ABBAS → TASHKENT · Q4 2024</div>
+        <h3>Pharmaceutical shipment — 6 × 20ft reefers, batch-tracked.</h3>
+        <p>A pharmaceutical manufacturer needed six reefer containers of temperature-controlled API from Mumbai to a Tashkent distribution hub under a fixed launch window. Cold-chain integrity, full Uzbek conformity certification, and CCD filing were all client-critical. Lazarus managed the complete door-to-door: export clearance at Nhava Sheva, sea to Bandar Abbas, Iran transit by rail, Sarakhs handover, Uzbek import and last-mile.</p>
+        <div class="case-stats">
+          <div class="s"><div class="k">TRANSIT</div><div class="v">31 days</div></div>
+          <div class="s"><div class="k">TEMP EXCURSIONS</div><div class="v">0</div></div>
+          <div class="s"><div class="k">CUSTOMS HOLDS</div><div class="v">0</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE FORM (pre-filled) -->
+<section class="block">
+  <div class="wrap">
+    <div class="qf">
+      <div class="left">
+        <div class="idx">◆ REQUEST A QUOTE · PRE-FILLED FOR THIS CORRIDOR</div>
+        <h2>India → Uzbekistan specialist. 2-hour response window.</h2>
+        <p>This form routes directly to the two specialists on our team who run the India–Central Asia desk. Origin, destination and route are pre-filled — you only answer the cargo-specific questions.</p>
+        <div class="locked-fields">
+          <div class="lf">FROM · <b>INDIA</b></div>
+          <div class="lf">TO · <b>UZBEKISTAN</b></div>
+        </div>
+        <div style="margin-top: 32px; font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.1em; line-height: 1.8;">
+          ◆ NDA AVAILABLE ON REQUEST<br>
+          ◆ NOT FORWARDED TO THIRD PARTIES<br>
+          ◆ FIRST REPLY IN 2 HOURS · EET · MON–FRI
+        </div>
+      </div>
+      <form class="form" onsubmit="event.preventDefault();">
+        <div class="field"><label>ORIGIN (locked)</label><input value="India — Mumbai / Mundra / Chennai" disabled></div>
+        <div class="field"><label>DESTINATION (locked)</label><input value="Uzbekistan — Tashkent / Samarkand / Bukhara" disabled></div>
+        <div class="field"><label>Indian port preference</label><select><option>No preference — you choose</option><option>Mundra (MUN)</option><option>Mumbai / Nhava Sheva</option><option>Chennai</option></select></div>
+        <div class="field"><label>Incoterms</label><select><option>EXW — you collect from factory</option><option>FOB — goods loaded on vessel</option><option>CIF / CFR</option><option>DAP — delivered, no import duty</option><option>DDP — delivered, duty paid</option></select></div>
+        <div class="field"><label>IEC code (if known)</label><input placeholder="AAACB1234A"></div>
+        <div class="field"><label>Cargo type</label><select><option>Pharmaceuticals (reefer / ambient)</option><option>Textiles / garments</option><option>Machinery / components</option><option>Chemicals (non-hazardous)</option><option>Chemicals (ADR)</option><option>General FCL</option><option>LCL / groupage</option></select></div>
+        <div class="field"><label>Cargo value (€)</label><input placeholder="e.g. 180,000"></div>
+        <div class="field"><label>Volume / weight</label><input placeholder="e.g. 2 × 40ft HC · 22t each"></div>
+        <div class="field"><label>Target dispatch date</label><input type="text" placeholder="e.g. first week of May"></div>
+        <div class="field"><label>Company</label><input placeholder="Your company"></div>
+        <div class="field"><label>Email</label><input placeholder="procurement@company.com"></div>
+        <div class="field full"><label>Anything else</label><textarea rows="2" placeholder="Certifications, temperature requirements, DDP, phased dispatch..." style="font-family: var(--sans);"></textarea></div>
+        <button class="submit">Send to India–UZ desk →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="block" style="border-bottom: 0;">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <div class="idx">07 · RELATED CORRIDORS</div>
+        <h2 style="margin-top: 10px;">Same origin. Nearby destinations.</h2>
+      </div>
+    </div>
+    <div class="related">
+      <div class="rel"><div class="route">IN → KZ</div><h4>India <span class="ar">→</span> Kazakhstan</h4><div class="meta"><span>30–38 d</span><span>€3,600–5,000</span><span style="margin-left: auto; color: var(--cyan);">VIEW →</span></div></div>
+      <div class="rel"><div class="route">IN → KG</div><h4>India <span class="ar">→</span> Kyrgyzstan</h4><div class="meta"><span>32–40 d</span><span>€4,100–5,600</span><span style="margin-left: auto; color: var(--cyan);">VIEW →</span></div></div>
+      <div class="rel"><div class="route">IN → TM</div><h4>India <span class="ar">→</span> Turkmenistan</h4><div class="meta"><span>26–34 d</span><span>€3,500–4,800</span><span style="margin-left: auto; color: var(--cyan);">VIEW →</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="meta"><span>© 2026 LAZARUS FORWARDING · LATVIA</span><span>CORRIDOR PAGE · IN→UZ · v1.0</span></div>
+</footer>
+</body>
+</html>

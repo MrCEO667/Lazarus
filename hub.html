@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Lazarus · Long-Haul Freight into Central Asia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  body { background: var(--bg); }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 64px; }
+  .bleed { width: 100%; }
+
+  /* Header */
+  header.nav {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(11,25,41,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.nav .inner {
+    display:flex; align-items: center; gap: 40px;
+    padding: 18px 64px;
+    max-width: 1440px; margin: 0 auto;
+  }
+  .logo {
+    display:flex; align-items:center; gap: 14px;
+    font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: 0.02em;
+  }
+  .logo .mark { width: 32px; height: 32px; border: 1.5px solid var(--cyan); display:flex; align-items:center; justify-content:center; color: var(--cyan); font-size: 18px;}
+  nav.primary { display:flex; gap: 28px; font-size: 15px; color: var(--text-2);}
+  nav.primary a { color: inherit; text-decoration: none; padding: 6px 0; position: relative;}
+  nav.primary a.current { color: var(--cyan); }
+  nav.primary a.current::after { content:""; position:absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--cyan);}
+  .lang { margin-left: auto; display:flex; gap: 2px; font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.14em;}
+  .lang span { padding: 4px 8px; cursor: pointer;}
+  .lang .active { background: var(--surface-2); color: var(--text);}
+  .btn-primary {
+    padding: 12px 22px; background: var(--warm); color: #1a0b05;
+    font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; cursor: pointer;
+    border: 0;
+  }
+  .btn-ghost {
+    padding: 12px 22px; border: 1px solid var(--line-2); background: transparent; color: var(--text);
+    font-family: var(--display); font-weight: 600; cursor: pointer;
+  }
+
+  /* Status bar */
+  .statusbar {
+    display:flex; gap: 0; font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    border-bottom: 1px solid var(--line); color: var(--text-3); background: #0A1423;
+  }
+  .statusbar > div { padding: 10px 20px; display:flex; align-items:center; gap: 10px; border-right: 1px solid var(--line);}
+  .statusbar .live { color: var(--green);}
+  .statusbar .live::before { content:""; width: 7px; height: 7px; background: var(--green); border-radius: 50%; box-shadow: 0 0 0 3px rgba(0,255,136,0.18);}
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 6fr 4fr; min-height: 840px; border-bottom: 1px solid var(--line);}
+  .hero .l { padding: 72px 64px 72px 64px; display:flex; flex-direction: column; justify-content: space-between;}
+  .hero .r { background: #0A1423; border-left: 1px solid var(--line); position: relative; overflow: hidden;}
+  .eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); display:flex; align-items:center; gap: 10px;}
+  .eyebrow::before { content:""; width: 8px; height: 8px; background: var(--cyan); display:inline-block;}
+  h1.hero-title { font-family: var(--display); font-weight: 800; font-size: 88px; line-height: 0.96; letter-spacing: -0.02em; margin: 22px 0 0;}
+  h1.hero-title span { color: var(--cyan);}
+  .sub { font-size: 19px; color: var(--text-2); line-height: 1.5; margin-top: 22px; max-width: 640px;}
+  .hero .origins { margin-top: 28px; display:flex; flex-wrap: wrap; gap: 10px;}
+  .chip { padding: 8px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--text-2); border: 1px solid var(--line-2);}
+  .arrow-chip { color: var(--cyan); font-family: var(--mono);}
+  .cta-row { display:flex; gap: 14px; margin-top: 36px;}
+  .trust-row { display:flex; gap: 40px; margin-top: 48px; flex-wrap: wrap;}
+  .trust-row .t { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--text-3);}
+  .trust-row .t b { display:block; font-family: var(--display); font-size: 26px; color: var(--text); letter-spacing: -0.01em; font-weight: 700; margin-top: 4px;}
+
+  /* Live map card inside hero right */
+  .map-card { position: absolute; inset: 32px; display:flex; flex-direction: column;}
+  .map-card .head { display:flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.14em;}
+  .map-card .head .live { color: var(--green);}
+  .map-card svg { flex:1; width: 100%;}
+  .shipment-list { border-top: 1px solid var(--line); padding-top: 18px;}
+  .ship { display:flex; gap: 14px; font-family: var(--mono); font-size: 13px; padding: 8px 0; color: var(--text-2);}
+  .ship .id { color: var(--cyan);}
+  .ship .route { flex: 1;}
+  .ship .state { color: var(--green);}
+  .ship .state.w { color: var(--amber);}
+
+  /* Section scaffolding */
+  section.block { padding: 96px 0; border-bottom: 1px solid var(--line);}
+  .section-head { display:flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px;}
+  .section-head h2 { font-family: var(--display); font-weight: 700; font-size: 56px; letter-spacing: -0.02em; margin: 0; line-height: 1.02; max-width: 900px;}
+  .section-head .idx { font-family: var(--mono); font-size: 13px; letter-spacing: 0.18em; color: var(--text-3);}
+
+  /* Corridor grid */
+  .filters { display:flex; gap: 8px; margin-bottom: 28px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; }
+  .filters .f { padding: 8px 14px; border: 1px solid var(--line); color: var(--text-2); cursor: pointer;}
+  .filters .f.on { background: var(--surface-2); border-color: var(--cyan); color: var(--cyan);}
+  .corridor-grid { display:grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: var(--line);}
+  .corridor-grid .c {
+    background: var(--bg); padding: 24px 22px; min-height: 180px;
+    display:flex; flex-direction: column; justify-content: space-between;
+    transition: background 160ms ease;
+    cursor: pointer;
+  }
+  .corridor-grid .c:hover { background: var(--surface);}
+  .corridor-grid .c .route { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; color: var(--text-3);}
+  .corridor-grid .c .o-d { font-family: var(--display); font-weight: 600; font-size: 20px; line-height: 1.2; margin-top: 8px;}
+  .corridor-grid .c .o-d .ar { color: var(--cyan);}
+  .corridor-grid .c .meta { font-family: var(--mono); font-size: 12px; color: var(--text-3); display:flex; justify-content:space-between; border-top: 1px solid var(--line); padding-top: 10px;}
+  .corridor-grid .c .meta b { color: var(--text-2); font-weight: 500;}
+  .corridor-grid .c .mode { display:inline-block; font-size: 11px; font-family: var(--mono); padding: 2px 6px; background: var(--surface-2); color: var(--cyan); letter-spacing: 0.08em;}
+  .corridor-grid .c:hover .last { opacity: 1;}
+  .corridor-grid .c .last { font-family: var(--mono); font-size: 11px; color: var(--green); opacity: 0.55; transition: opacity 160ms;}
+
+  /* Routes */
+  .routes { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--line);}
+  .route {
+    background: var(--bg); padding: 28px; display:flex; flex-direction: column; gap: 16px; min-height: 320px;
+  }
+  .route .n { font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.16em;}
+  .route h3 { font-family: var(--display); font-size: 26px; margin: 0; letter-spacing: -0.01em; line-height: 1.08;}
+  .route .path { font-family: var(--mono); font-size: 13px; color: var(--cyan); line-height: 1.55;}
+  .route .stats { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--text-3); border-top: 1px solid var(--line); padding-top: 14px;}
+  .route .stats b { display:block; color: var(--text); font-family: var(--display); font-size: 20px; font-weight: 700; margin-top: 4px; letter-spacing: -0.01em;}
+  .route .ideal { font-size: 14px; color: var(--text-2); line-height: 1.5;}
+
+  /* Rate calculator */
+  .calc-wrap { display:grid; grid-template-columns: 7fr 5fr; gap: 2px; background: var(--line); border: 1px solid var(--line);}
+  .calc-wrap .panel { background: var(--bg); padding: 40px;}
+  .calc-wrap .fields { display:grid; grid-template-columns: 1fr 1fr; gap: 20px;}
+  .field { display:flex; flex-direction: column; gap: 8px;}
+  .field label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--text-3); text-transform: uppercase;}
+  .field select, .field input {
+    appearance: none;
+    background: #0A1423; border: 1px solid var(--line-2); color: var(--text);
+    padding: 14px 16px; font-family: var(--display); font-size: 17px; font-weight: 600;
+    outline: none;
+  }
+  .field select:focus, .field input:focus { border-color: var(--cyan);}
+  .field.full { grid-column: 1 / -1;}
+  .result-panel { background: #0A1423; position: relative;}
+  .result-panel .rp-inner { padding: 40px; display:flex; flex-direction: column; gap: 22px; height: 100%;}
+  .result-panel .lbl { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.18em;}
+  .result-panel .band {
+    font-family: var(--display); font-weight: 800; font-size: 72px; letter-spacing: -0.02em; line-height: 1;
+    color: var(--cyan);
+  }
+  .result-panel .range { font-family: var(--mono); color: var(--text-2); font-size: 18px;}
+  .result-panel .details { border-top: 1px solid var(--line); padding-top: 18px; display:flex; flex-direction: column; gap: 10px;}
+  .result-panel .drow { display:flex; justify-content: space-between; font-family: var(--mono); font-size: 14px; color: var(--text-2);}
+  .result-panel .drow b { color: var(--text); font-weight: 500;}
+  .result-panel .exact {
+    margin-top: auto; background: var(--warm); color: #1a0b05; padding: 16px 22px;
+    font-family: var(--display); font-weight: 700; text-align:center; cursor: pointer;
+  }
+  .calc-foot {
+    padding: 16px 28px; background: #0A1423; font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.06em;
+    display:flex; justify-content:space-between; border-top: 1px solid var(--line);
+  }
+
+  /* Trust tiles */
+  .trust-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--line); border: 1px solid var(--line);}
+  .trust-grid .t { background: var(--bg); padding: 40px 32px;}
+  .trust-grid .t .big { font-family: var(--display); font-weight: 800; font-size: 64px; letter-spacing: -0.02em; line-height: 1; color: var(--text);}
+  .trust-grid .t .k { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--text-3); margin-top: 16px;}
+  .trust-grid .t .n { color: var(--text-2); font-size: 15px; margin-top: 8px; line-height: 1.45;}
+  .badges { display:flex; gap: 24px; margin-top: 40px; align-items: center;}
+  .badge { padding: 14px 22px; border: 1px solid var(--line-2); font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em; color: var(--text-2);}
+
+  /* Case studies */
+  .cases { display:grid; grid-template-columns: 1fr 1fr; gap: 24px;}
+  .case { border: 1px solid var(--line); display:flex; flex-direction: column; cursor: pointer;}
+  .case .img {
+    height: 340px; background: #0A1423; position: relative;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(0,212,255,0.04) 0 12px, transparent 12px 24px),
+      linear-gradient(135deg, #1E3A5F 0%, #0A1423 100%);
+    display:flex; align-items: flex-end; padding: 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .case .img .tag { font-family: var(--mono); font-size: 11px; background: rgba(11,25,41,0.7); padding: 6px 10px; color: var(--green); letter-spacing: 0.12em;}
+  .case .img .ph { position:absolute; top: 28px; left: 28px; right: 28px; font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.65;}
+  .case .body { padding: 28px 32px;}
+  .case .route-line { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; color: var(--cyan);}
+  .case h3 { font-family: var(--display); font-size: 30px; margin: 10px 0 12px; line-height: 1.12;}
+  .case p { color: var(--text-2); font-size: 16px; line-height: 1.55; margin: 0;}
+  .case .outcome { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 13px; color: var(--green);}
+  .case .outcome b { color: var(--text); font-weight: 500;}
+
+  /* Customs */
+  .customs { display:grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: start;}
+  .eaeu-box { background: var(--surface); border: 1px solid var(--line); padding: 32px;}
+  .eaeu-box h3 { font-family: var(--display); font-size: 26px; margin: 0 0 12px;}
+  .eaeu-list { display:flex; flex-direction: column; gap: 2px;}
+  .eaeu-list .row { padding: 16px 20px; background: var(--bg); display:flex; justify-content:space-between; align-items: center; font-size: 15px;}
+  .eaeu-list .row .c { display:flex; gap: 14px; align-items: center;}
+  .eaeu-list .row .flag { width: 28px; height: 20px; background: var(--surface-2); border: 1px solid var(--line-2); font-family: var(--mono); font-size: 10px; color: var(--text-3); display:flex; align-items:center; justify-content:center;}
+  .eaeu-list .row .days { font-family: var(--mono); color: var(--cyan); font-size: 13px;}
+
+  /* Content hub */
+  .guides { display:grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line);}
+  .guide { background: var(--bg); padding: 32px; min-height: 240px; display:flex; flex-direction: column; justify-content: space-between; cursor: pointer;}
+  .guide:hover { background: var(--surface);}
+  .guide .cat { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--cyan);}
+  .guide h3 { font-family: var(--display); font-size: 22px; margin: 12px 0 0; line-height: 1.2; letter-spacing: -0.01em;}
+  .guide .m { font-family: var(--mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.1em;}
+
+  /* Final CTA */
+  .final {
+    background:
+      linear-gradient(180deg, rgba(0,212,255,0.06), rgba(255,107,61,0.04)),
+      var(--surface);
+    border: 1px solid var(--line-2);
+    padding: 64px; display:grid; grid-template-columns: 5fr 7fr; gap: 64px;
+  }
+  .final h2 { font-family: var(--display); font-size: 56px; margin: 0; line-height: 1.02; letter-spacing: -0.02em;}
+  .final .promise { margin-top: 20px; font-family: var(--mono); font-size: 13px; color: var(--green); letter-spacing: 0.14em;}
+  .form-card { display:grid; grid-template-columns: 1fr 1fr; gap: 16px;}
+  .form-card .field { gap: 6px;}
+  .form-card input, .form-card select, .form-card textarea {
+    background: #0A1423; border: 1px solid var(--line-2); color: var(--text); padding: 12px 14px;
+    font-family: var(--sans); font-size: 15px; outline: none;
+  }
+  .form-card .full { grid-column: 1 / -1;}
+  .form-card .upload {
+    grid-column: 1 / -1; border: 1px dashed var(--line-2); padding: 16px;
+    font-family: var(--mono); color: var(--text-3); font-size: 13px; display:flex; justify-content: space-between; cursor: pointer;
+  }
+  .form-card .submit {
+    grid-column: 1 / -1; padding: 16px 24px; background: var(--warm); color: #1a0b05;
+    font-family: var(--display); font-weight: 700; font-size: 17px; border: 0; cursor: pointer;
+  }
+
+  /* Footer */
+  footer { padding: 56px 64px 40px; background: #08111E; border-top: 1px solid var(--line); color: var(--text-3);}
+  footer .ft { max-width: 1440px; margin: 0 auto; display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;}
+  footer h4 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--text-2); margin: 0 0 14px;}
+  footer a { color: var(--text-3); text-decoration: none; display:block; padding: 4px 0; font-size: 14px;}
+  footer .meta { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; display:flex; justify-content:space-between;}
+
+  /* Annotations */
+  .anno {
+    position: absolute; font-family: var(--mono); font-size: 11px; color: var(--warm); letter-spacing: 0.12em;
+    text-transform: uppercase; pointer-events: none;
+    display:flex; align-items: center; gap: 10px;
+  }
+  .anno::before { content:""; width: 16px; height: 1px; background: var(--warm);}
+
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="inner">
+    <div class="logo"><span class="mark">L</span>LAZARUS</div>
+    <nav class="primary">
+      <a href="#" class="current">Corridors</a>
+      <a href="#">Services</a>
+      <a href="#">Rate calculator</a>
+      <a href="#">Case studies</a>
+      <a href="#">About</a>
+    </nav>
+    <div class="lang">
+      <span class="active">EN</span><span>RU</span><span>LV</span><span>KZ</span>
+    </div>
+    <button class="btn-primary">Get a rate →</button>
+  </div>
+</header>
+
+<!-- Status bar -->
+<div class="statusbar">
+  <div class="live">OPERATIONS LIVE</div>
+  <div>17 ACTIVE SHIPMENTS</div>
+  <div>20 CORRIDORS · 5 DESTINATIONS</div>
+  <div>MULTIMODAL · SEA · RAIL · ROAD · AIR</div>
+  <div style="margin-left: auto; border-right: 0;">LAST UPDATED · <span style="color: var(--text-2); margin-left: 6px;">20·APR·2026 · 14:32 EET</span></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="l">
+    <div>
+      <div class="eyebrow">Central Asia Corridors · Flagship Service</div>
+      <h1 class="hero-title">Freight into Central Asia from <span>anywhere</span> in the world.</h1>
+      <p class="sub">India • Malaysia • USA • Argentina • China • EU, moving to Kazakhstan, Uzbekistan, Kyrgyzstan, Turkmenistan or Tajikistan. 10 years. 121,000 tons/year. One team that owns the whole route — origin to delivered.</p>
+      <div class="origins">
+        <span class="chip">🇮🇳 INDIA</span><span class="chip">🇲🇾 MALAYSIA</span><span class="chip">🇺🇸 USA</span><span class="chip">🇦🇷 ARGENTINA</span><span class="chip">🇨🇳 CHINA</span><span class="chip">🇪🇺 EU</span>
+        <span class="arrow-chip" style="padding: 8px 8px;">→</span>
+        <span class="chip">🇰🇿 KZ</span><span class="chip">🇺🇿 UZ</span><span class="chip">🇰🇬 KG</span><span class="chip">🇹🇲 TM</span><span class="chip">🇹🇯 TJ</span>
+      </div>
+      <div class="cta-row">
+        <button class="btn-primary">Get instant rate indication →</button>
+        <button class="btn-ghost">Talk to a corridor specialist</button>
+      </div>
+    </div>
+    <div class="trust-row">
+      <div class="t">CARGO MOVED<b>€25M / yr</b></div>
+      <div class="t">TONNAGE<b>121,000 t</b></div>
+      <div class="t">REPEAT CLIENTS<b>350+</b></div>
+      <div class="t">LIABILITY COVER<b>€200K</b></div>
+      <div class="t">MARKET TENURE<b>10 years</b></div>
+    </div>
+  </div>
+
+  <div class="r">
+    <div class="map-card">
+      <div class="head">
+        <span>◆ LIVE CORRIDOR MAP</span>
+        <span class="live">● 17 IN TRANSIT</span>
+      </div>
+      <svg viewBox="0 0 600 520" preserveAspectRatio="xMidYMid meet" style="margin: 16px 0 4px;">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%"><stop offset="0%" stop-color="#00D4FF" stop-opacity="0.22"/><stop offset="100%" stop-color="#00D4FF" stop-opacity="0"/></radialGradient>
+          <pattern id="gridp" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#14304d" stroke-width="0.5"/></pattern>
+        </defs>
+        <rect width="600" height="520" fill="url(#gridp)"/>
+        <!-- destination cluster -->
+        <circle cx="330" cy="230" r="90" fill="url(#glow)"/>
+        <circle cx="330" cy="230" r="10" fill="#00D4FF"/>
+        <text x="346" y="218" fill="#F5F7FA" font-family="JetBrains Mono" font-size="11" font-weight="600">KAZAKHSTAN</text>
+        <text x="346" y="232" fill="#F5F7FA" font-family="JetBrains Mono" font-size="11" font-weight="600">UZBEKISTAN</text>
+        <text x="346" y="246" fill="#F5F7FA" font-family="JetBrains Mono" font-size="11" font-weight="600">KG · TM · TJ</text>
+        <!-- origins -->
+        <g font-family="JetBrains Mono" font-size="10" fill="#B8C5DB">
+          <circle cx="90" cy="240" r="5" fill="#FF6B3D"/><text x="100" y="243">USA (NY/LA)</text>
+          <circle cx="65" cy="430" r="5" fill="#FF6B3D"/><text x="75" y="433">ARGENTINA</text>
+          <circle cx="430" cy="340" r="5" fill="#FF6B3D"/><text x="440" y="343">INDIA (Mundra)</text>
+          <circle cx="510" cy="400" r="5" fill="#FF6B3D"/><text x="458" y="418">MALAYSIA</text>
+          <circle cx="540" cy="300" r="5" fill="#FF6B3D"/><text x="495" y="292">CHINA</text>
+          <circle cx="240" cy="120" r="5" fill="#FF6B3D"/><text x="250" y="123">EU (Riga)</text>
+        </g>
+        <!-- arcs -->
+        <g stroke="#00D4FF" stroke-width="1.3" fill="none">
+          <path d="M 90 240 Q 200 100 330 230" stroke-dasharray="4 3"/>
+          <path d="M 65 430 Q 180 320 330 230" stroke-dasharray="4 3"/>
+          <path d="M 430 340 Q 400 260 330 230"/>
+          <path d="M 510 400 Q 440 300 330 230" stroke-dasharray="4 3"/>
+          <path d="M 540 300 Q 430 240 330 230"/>
+          <path d="M 240 120 Q 280 160 330 230"/>
+        </g>
+        <!-- moving dots -->
+        <g fill="#00FF88">
+          <circle cx="230" cy="165" r="3.5"><animate attributeName="opacity" values="0;1;0" dur="2.6s" repeatCount="indefinite"/></circle>
+          <circle cx="180" cy="320" r="3.5"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="0.5s"/></circle>
+          <circle cx="380" cy="285" r="3.5"><animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite" begin="1s"/></circle>
+          <circle cx="440" cy="255" r="3.5"><animate attributeName="opacity" values="0;1;0" dur="2.8s" repeatCount="indefinite" begin="0.2s"/></circle>
+        </g>
+      </svg>
+      <div class="shipment-list">
+        <div class="ship"><span class="id">LZR-24178</span><span class="route">Mundra → Bandar Abbas → Tashkent</span><span class="state">● IN TRANSIT · D21</span></div>
+        <div class="ship"><span class="id">LZR-24175</span><span class="route">Houston → Aktau → Almaty</span><span class="state">● IN TRANSIT · D33</span></div>
+        <div class="ship"><span class="id">LZR-24172</span><span class="route">Shanghai → Khorgos → Bishkek</span><span class="state w">● CUSTOMS · D14</span></div>
+        <div class="ship"><span class="id">LZR-24169</span><span class="route">Buenos Aires → Baku → Ashgabat</span><span class="state">● AT SEA · D09</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: Corridor grid -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="idx">02 · CORRIDOR ATLAS</div>
+        <h2 style="margin-top: 10px;">Pick your lane. Every corridor has a real page.</h2>
+      </div>
+      <div class="filters">
+        <div class="f on">ALL 20</div>
+        <div class="f">FROM INDIA</div>
+        <div class="f">FROM USA</div>
+        <div class="f">FROM MALAYSIA</div>
+        <div class="f">FROM ARGENTINA</div>
+      </div>
+    </div>
+
+    <div class="corridor-grid">
+      <!-- IN row -->
+      <a href="india-uzbekistan.html" style="text-decoration: none; color: inherit;">
+      <div class="c" style="background: var(--surface);">
+        <div>
+          <div class="route">IN → UZ · FLAGSHIP</div>
+          <div class="o-d">India <span class="ar">→</span> Uzbekistan</div>
+          <div class="mode" style="margin-top: 10px;">SEA + RAIL</div>
+        </div>
+        <div>
+          <div class="last">Last shipment · 2 days ago</div>
+          <div class="meta"><span>TRANSIT</span><b>28–35 d</b></div>
+        </div>
+      </div></a>
+      <div class="c"><div><div class="route">IN → KZ</div><div class="o-d">India <span class="ar">→</span> Kazakhstan</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">Last shipment · 5 days ago</div><div class="meta"><span>TRANSIT</span><b>30–38 d</b></div></div></div>
+      <div class="c"><div><div class="route">IN → KG</div><div class="o-d">India <span class="ar">→</span> Kyrgyzstan</div><div class="mode" style="margin-top: 10px;">MULTIMODAL</div></div><div><div class="last">Weekly departures</div><div class="meta"><span>TRANSIT</span><b>32–40 d</b></div></div></div>
+      <div class="c"><div><div class="route">IN → TM</div><div class="o-d">India <span class="ar">→</span> Turkmenistan</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">Bi-weekly</div><div class="meta"><span>TRANSIT</span><b>26–34 d</b></div></div></div>
+      <div class="c"><div><div class="route">IN → TJ</div><div class="o-d">India <span class="ar">→</span> Tajikistan</div><div class="mode" style="margin-top: 10px;">MULTIMODAL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>35–45 d</b></div></div></div>
+
+      <!-- MY -->
+      <div class="c"><div><div class="route">MY → KZ</div><div class="o-d">Malaysia <span class="ar">→</span> KZ</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">Monthly</div><div class="meta"><span>TRANSIT</span><b>35–42 d</b></div></div></div>
+      <div class="c"><div><div class="route">MY → UZ</div><div class="o-d">Malaysia <span class="ar">→</span> UZ</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">Monthly</div><div class="meta"><span>TRANSIT</span><b>33–40 d</b></div></div></div>
+      <div class="c"><div><div class="route">MY → KG</div><div class="o-d">Malaysia <span class="ar">→</span> KG</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>36–44 d</b></div></div></div>
+      <div class="c"><div><div class="route">MY → TM</div><div class="o-d">Malaysia <span class="ar">→</span> TM</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>34–42 d</b></div></div></div>
+      <div class="c"><div><div class="route">MY → TJ</div><div class="o-d">Malaysia <span class="ar">→</span> TJ</div><div class="mode" style="margin-top: 10px;">MULTIMODAL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>38–46 d</b></div></div></div>
+
+      <!-- US -->
+      <div class="c"><div><div class="route">US → KZ</div><div class="o-d">USA <span class="ar">→</span> Kazakhstan</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">Last shipment · 6 days ago</div><div class="meta"><span>TRANSIT</span><b>38–48 d</b></div></div></div>
+      <div class="c"><div><div class="route">US → UZ</div><div class="o-d">USA <span class="ar">→</span> Uzbekistan</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">Monthly</div><div class="meta"><span>TRANSIT</span><b>40–50 d</b></div></div></div>
+      <div class="c"><div><div class="route">US → KG</div><div class="o-d">USA <span class="ar">→</span> Kyrgyzstan</div><div class="mode" style="margin-top: 10px;">MULTIMODAL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>42–52 d</b></div></div></div>
+      <div class="c"><div><div class="route">US → TM</div><div class="o-d">USA <span class="ar">→</span> TM</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>36–46 d</b></div></div></div>
+      <div class="c"><div><div class="route">US → TJ</div><div class="o-d">USA <span class="ar">→</span> Tajikistan</div><div class="mode" style="margin-top: 10px;">MULTIMODAL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>44–54 d</b></div></div></div>
+
+      <!-- AR -->
+      <div class="c"><div><div class="route">AR → KZ</div><div class="o-d">Argentina <span class="ar">→</span> KZ</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>45–60 d</b></div></div></div>
+      <div class="c"><div><div class="route">AR → UZ</div><div class="o-d">Argentina <span class="ar">→</span> UZ</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>46–60 d</b></div></div></div>
+      <div class="c"><div><div class="route">AR → KG</div><div class="o-d">Argentina <span class="ar">→</span> KG</div><div class="mode" style="margin-top: 10px;">MULTIMODAL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>48–62 d</b></div></div></div>
+      <div class="c"><div><div class="route">AR → TM</div><div class="o-d">Argentina <span class="ar">→</span> TM</div><div class="mode" style="margin-top: 10px;">SEA + RAIL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>44–58 d</b></div></div></div>
+      <div class="c"><div><div class="route">AR → TJ</div><div class="o-d">Argentina <span class="ar">→</span> TJ</div><div class="mode" style="margin-top: 10px;">MULTIMODAL</div></div><div><div class="last">On request</div><div class="meta"><span>TRANSIT</span><b>50–65 d</b></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: Routes -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="idx">03 · HOW WE MOVE CARGO</div>
+        <h2 style="margin-top: 10px;">Four physical routes into Central Asia. We know each one by operational detail, not marketing brochure.</h2>
+      </div>
+    </div>
+    <div class="routes">
+      <div class="route">
+        <div class="n">ROUTE · 01</div>
+        <h3>Sea + Rail via Bandar Abbas</h3>
+        <div class="path">ORIGIN PORT<br>→ Bandar Abbas (IR)<br>→ Sarakhs / Incheburun<br>→ Destination rail terminal</div>
+        <div class="ideal">Ideal for India & SE Asia cargo. ADR-compatible. Works for FCL, LCL, reefer.</div>
+        <div class="stats">
+          <div>TRANSIT<b>28–35 d</b></div>
+          <div>COST<b>€3.8–5.2K</b></div>
+        </div>
+      </div>
+      <div class="route">
+        <div class="n">ROUTE · 02</div>
+        <h3>Sea + Rail via Caspian (Aktau / Baku)</h3>
+        <div class="path">ORIGIN PORT<br>→ Poti / Batumi<br>→ Baku → Aktau (Caspian ferry)<br>→ KZ/UZ rail</div>
+        <div class="ideal">Best for Argentina, Americas, parts of Africa. Avoids Iran transit.</div>
+        <div class="stats">
+          <div>TRANSIT<b>38–50 d</b></div>
+          <div>COST<b>€4.5–7.2K</b></div>
+        </div>
+      </div>
+      <div class="route">
+        <div class="n">ROUTE · 03</div>
+        <h3>Rail via China (Alashankou / Khorgos)</h3>
+        <div class="path">Chinese inland origin<br>→ Alashankou or Khorgos<br>→ KZ / UZ rail network</div>
+        <div class="ideal">Fastest for East Asian origins. Will be primary route after CKU railway opens.</div>
+        <div class="stats">
+          <div>TRANSIT<b>14–22 d</b></div>
+          <div>COST<b>€3.4–6.0K</b></div>
+        </div>
+      </div>
+      <div class="route">
+        <div class="n">ROUTE · 04</div>
+        <h3>Air Direct</h3>
+        <div class="path">Origin airport<br>→ direct charter or scheduled<br>→ ALA / TAS / FRU</div>
+        <div class="ideal">Urgent, high-value, temperature-sensitive. Pharma & electronics.</div>
+        <div class="stats">
+          <div>TRANSIT<b>3–7 d</b></div>
+          <div>COST<b>€4.2–12/kg</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4: Live rate indicator -->
+<section class="block" style="background: #0A1423;">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="idx">04 · INSTANT RATE INDICATION</div>
+        <h2 style="margin-top: 10px;">Four fields. Two-second answer. Real corridor, real rate band.</h2>
+      </div>
+      <div class="idx" style="color: var(--green);">◆ UPDATED MONTHLY · APRIL 2026</div>
+    </div>
+
+    <div class="calc-wrap">
+      <div class="panel">
+        <div class="fields">
+          <div class="field">
+            <label>Origin country</label>
+            <select id="rc-origin">
+              <option>India (Mumbai / Mundra / Chennai)</option>
+              <option>Malaysia (Port Klang)</option>
+              <option>USA (Houston / LA / NY)</option>
+              <option>Argentina (Buenos Aires)</option>
+              <option>China (Shanghai / Qingdao)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Destination country</label>
+            <select id="rc-dest">
+              <option>Uzbekistan (Tashkent)</option>
+              <option>Kazakhstan (Almaty / Nur-Sultan)</option>
+              <option>Kyrgyzstan (Bishkek)</option>
+              <option>Turkmenistan (Ashgabat)</option>
+              <option>Tajikistan (Dushanbe)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Cargo type</label>
+            <select id="rc-type">
+              <option>Container — FCL 20ft</option>
+              <option>Container — FCL 40ft</option>
+              <option>LCL / groupage</option>
+              <option>Project / oversized</option>
+              <option>Air freight</option>
+              <option>Reefer</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Volume / weight</label>
+            <input type="text" value="1 × 20ft FCL · ~22 tons">
+          </div>
+          <div class="field full">
+            <label>Special requirements (optional)</label>
+            <input type="text" placeholder="e.g. ADR class 3, temperature control, DDP terms">
+          </div>
+        </div>
+        <div style="margin-top: 28px;">
+          <button class="btn-primary" id="rc-calc">Calculate indicative rate →</button>
+        </div>
+      </div>
+
+      <div class="result-panel">
+        <div class="rp-inner">
+          <div>
+            <div class="lbl">INDICATIVE RATE · 1 × 20ft FCL</div>
+            <div class="band" id="rc-band">€3,800 – €5,200</div>
+            <div class="range" id="rc-range">Transit 28–35 days · India → Uzbekistan via Bandar Abbas</div>
+          </div>
+          <div class="details">
+            <div class="drow"><span>Ocean leg (Mundra → Bandar Abbas)</span><b>€1,150 – €1,450</b></div>
+            <div class="drow"><span>Iran transit + rail (Bandar → Sarakhs)</span><b>€1,800 – €2,400</b></div>
+            <div class="drow"><span>UZ rail + last-mile</span><b>€600 – €950</b></div>
+            <div class="drow"><span>Customs, docs, insurance</span><b>€250 – €400</b></div>
+            <div class="drow"><span>Incoterms</span><b>DAP (CPT / DDP on request)</b></div>
+          </div>
+          <div class="exact" id="rc-exact">Get an exact quote from your corridor specialist →</div>
+        </div>
+      </div>
+    </div>
+    <div class="calc-foot">
+      <span>◆ Rate bands are indicative and based on last 30 days of settled shipments on the selected lane.</span>
+      <span>SPECIALIST REPLIES · WITHIN 2 HOURS · BUSINESS HOURS</span>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Trust -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="idx">05 · WHY LAZARUS ON THESE CORRIDORS</div>
+        <h2 style="margin-top: 10px;">Trust by data, not adjectives.</h2>
+      </div>
+    </div>
+    <div class="trust-grid">
+      <div class="t"><div class="big">€25M</div><div class="k">CARGO MOVED / YR</div><div class="n">Total declared value across 2024 shipments.</div></div>
+      <div class="t"><div class="big">121,000 t</div><div class="k">TONNAGE / YR</div><div class="n">Road, sea, rail, air, multimodal combined.</div></div>
+      <div class="t"><div class="big">350+</div><div class="k">REPEAT CLIENTS</div><div class="n">Industrial shippers who book us more than once.</div></div>
+      <div class="t"><div class="big">€200K</div><div class="k">LIABILITY INSURANCE</div><div class="n">Forwarder liability cover per consignment.</div></div>
+    </div>
+    <div class="badges">
+      <span class="mono" style="color: var(--text-3); font-size: 12px; letter-spacing: 0.14em;">MEMBERSHIPS ·</span>
+      <div class="badge">FREIGHT FORWARDERS FAMILY</div>
+      <div class="badge">GLOBAL LOGISTIC ALLIANCE</div>
+      <div class="badge">10 YEARS · SINCE 2016</div>
+      <div class="badge">HQ · RIGA · EU</div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 6: Cases -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="idx">06 · CORRIDOR CASE STUDIES</div>
+        <h2 style="margin-top: 10px;">Projects on the record.</h2>
+      </div>
+    </div>
+    <div class="cases">
+      <div class="case">
+        <div class="img">
+          <div class="ph">PROJECT PHOTO · BALL MILLS ON FLATRACK · 7,000km IT→KG</div>
+          <div class="tag">● ON TIME · LAUNCH CRITICAL</div>
+        </div>
+        <div class="body">
+          <div class="route-line">ITALY → KYRGYZSTAN · 7,000 km · 45 DAYS</div>
+          <h3>Full ceramic tile plant transport</h3>
+          <p>Ball mills, silos, electronics and precision tooling moved from Sassuolo to Bishkek as a single managed project. Eight multimodal legs. Six customs touchpoints. Zero substitutions to a client-committed plant launch window.</p>
+          <div class="outcome">OUTCOME · <b>Plant started production on the scheduled date. Repeat order in 2023.</b></div>
+        </div>
+      </div>
+      <div class="case">
+        <div class="img">
+          <div class="ph">PROJECT PHOTO · ISO TANK · ADR CLASS 3</div>
+          <div class="tag" style="color: var(--amber);">● ADR · TIME-CRITICAL</div>
+        </div>
+        <div class="body">
+          <div class="route-line">ITALY → KYRGYZSTAN · ADR CLASS 3 · 22 DAYS</div>
+          <h3>Chemical dispersant tanker transport</h3>
+          <p>Hazardous dispersant in bulk ISO tanks, full dangerous-goods compliance chain across EU–Turkey–Iran–CA transit. Temperature-stable, documentation-complete at each jurisdiction.</p>
+          <div class="outcome">OUTCOME · <b>Delivered within the 25-day contractual window. Full ADR chain of custody.</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 7: Customs -->
+<section class="block" style="background: #0A1423;">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="idx">07 · CUSTOMS & COMPLIANCE</div>
+        <h2 style="margin-top: 10px;">We own the customs complexity. You don't.</h2>
+      </div>
+    </div>
+    <div class="customs">
+      <div class="eaeu-box">
+        <h3>EAEU at a glance</h3>
+        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55;">Kazakhstan and Kyrgyzstan are full EAEU members — once cargo clears either, it moves freely within the union. Uzbekistan, Turkmenistan and Tajikistan are non-members; each requires its own clearance. This map alone saves you a week of clarifying calls.</p>
+        <div class="eaeu-list" style="margin-top: 18px;">
+          <div class="row"><div class="c"><div class="flag">KZ</div><span>Kazakhstan</span></div><div><span style="color: var(--green); font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;">EAEU MEMBER</span></div></div>
+          <div class="row"><div class="c"><div class="flag">KG</div><span>Kyrgyzstan</span></div><div><span style="color: var(--green); font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;">EAEU MEMBER</span></div></div>
+          <div class="row"><div class="c"><div class="flag">UZ</div><span>Uzbekistan</span></div><div><span style="color: var(--amber); font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;">OBSERVER</span></div></div>
+          <div class="row"><div class="c"><div class="flag">TM</div><span>Turkmenistan</span></div><div><span style="color: var(--text-3); font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;">NON-MEMBER</span></div></div>
+          <div class="row"><div class="c"><div class="flag">TJ</div><span>Tajikistan</span></div><div><span style="color: var(--text-3); font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;">NON-MEMBER</span></div></div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+          <div style="padding: 28px; background: var(--surface); border-left: 2px solid var(--cyan);">
+            <div class="idx" style="color: var(--cyan);">DOCUMENTATION WE HANDLE</div>
+            <ul style="padding-left: 18px; color: var(--text-2); line-height: 1.7; margin: 14px 0 0; font-size: 15px;">
+              <li>Commercial invoice + packing list</li>
+              <li>Origin export declaration (EX-A, SB, etc.)</li>
+              <li>CMR / rail waybill / Bill of Lading</li>
+              <li>Certificate of Origin (FORM A, CT-1)</li>
+              <li>ADR / IMO documentation (where applicable)</li>
+              <li>EAEU T-1 transit declaration</li>
+              <li>Destination import customs + VAT filings</li>
+            </ul>
+          </div>
+          <div style="padding: 28px; background: var(--surface); border-left: 2px solid var(--green);">
+            <div class="idx" style="color: var(--green);">TYPICAL CLEARANCE TIMES</div>
+            <div style="margin-top: 16px; display:flex; flex-direction: column; gap: 12px;">
+              <div style="display:flex; justify-content:space-between; font-family: var(--mono); font-size: 14px; color: var(--text-2); border-bottom: 1px dashed var(--line); padding-bottom: 8px;"><span>Iran transit</span><b style="color: var(--text);">1–2 days</b></div>
+              <div style="display:flex; justify-content:space-between; font-family: var(--mono); font-size: 14px; color: var(--text-2); border-bottom: 1px dashed var(--line); padding-bottom: 8px;"><span>Kazakhstan import</span><b style="color: var(--text);">2–3 days</b></div>
+              <div style="display:flex; justify-content:space-between; font-family: var(--mono); font-size: 14px; color: var(--text-2); border-bottom: 1px dashed var(--line); padding-bottom: 8px;"><span>Uzbekistan import</span><b style="color: var(--text);">3–5 days</b></div>
+              <div style="display:flex; justify-content:space-between; font-family: var(--mono); font-size: 14px; color: var(--text-2); border-bottom: 1px dashed var(--line); padding-bottom: 8px;"><span>EAEU onward (KG)</span><b style="color: var(--text);">1 day</b></div>
+              <div style="display:flex; justify-content:space-between; font-family: var(--mono); font-size: 14px; color: var(--text-2);"><span>Tajikistan onward</span><b style="color: var(--text);">2–4 days</b></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 24px; padding: 28px; background: var(--surface-2); border: 1px solid var(--cyan);">
+          <div style="display:flex; align-items: center; gap: 16px;">
+            <div style="font-family: var(--mono); color: var(--cyan); font-size: 13px; letter-spacing: 0.14em;">◆ CUSTOMS BROKER ON EVERY LEG</div>
+          </div>
+          <div style="margin-top: 10px; font-size: 17px; color: var(--text); line-height: 1.5;">Lazarus has licensed customs brokers at origin, transit and destination for every corridor. You file one set of documents, with us, once.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 8: Content hub -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="idx">08 · CORRIDOR GUIDES</div>
+        <h2 style="margin-top: 10px;">Plain-language operational guides for each corridor.</h2>
+      </div>
+    </div>
+    <div class="guides">
+      <div class="guide">
+        <div><div class="cat">GUIDE · IN→UZ</div><h3>How to import from India to Uzbekistan in 2026</h3></div>
+        <div class="m">14 MIN READ · UPDATED APR 2026</div>
+      </div>
+      <div class="guide">
+        <div><div class="cat">GUIDE · US→KZ</div><h3>US-to-Kazakhstan freight cost calculator explained</h3></div>
+        <div class="m">9 MIN READ · UPDATED APR 2026</div>
+      </div>
+      <div class="guide">
+        <div><div class="cat">ROUTE COMPARE</div><h3>Argentina to Central Asia: Iran vs. Caspian routing</h3></div>
+        <div class="m">11 MIN READ · UPDATED MAR 2026</div>
+      </div>
+      <div class="guide">
+        <div><div class="cat">REGULATORY</div><h3>EAEU customs for non-members: UZ, TM, TJ playbook</h3></div>
+        <div class="m">16 MIN READ</div>
+      </div>
+      <div class="guide">
+        <div><div class="cat">RAIL</div><h3>What the CKU railway will change for your cargo</h3></div>
+        <div class="m">7 MIN READ</div>
+      </div>
+      <div class="guide">
+        <div><div class="cat">ADR</div><h3>Shipping dangerous goods into Central Asia: a checklist</h3></div>
+        <div class="m">12 MIN READ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 9: Final CTA -->
+<section class="block" style="border-bottom: 0;">
+  <div class="wrap">
+    <div class="final">
+      <div>
+        <div class="idx">09 · QUOTE REQUEST</div>
+        <h2>Tell us what you're shipping.</h2>
+        <p style="color: var(--text-2); font-size: 17px; line-height: 1.55; margin-top: 20px;">Fill in what you know — we can work from as little as origin, destination and rough cargo weight. Your request routes to the corridor specialist for your lane, not a general inbox.</p>
+        <div class="promise">◆ A CORRIDOR SPECIALIST REPLIES WITHIN 2 HOURS · BUSINESS HOURS EET</div>
+        <div style="margin-top: 32px; display:flex; flex-direction: column; gap: 12px; font-family: var(--mono); font-size: 13px; color: var(--text-3); letter-spacing: 0.08em;">
+          <div>◆ NO PHONE TAG · EMAIL OR PORTAL</div>
+          <div>◆ NDA AVAILABLE ON REQUEST</div>
+          <div>◆ WE DO NOT FORWARD YOUR CARGO DETAILS TO THIRD PARTIES</div>
+        </div>
+      </div>
+      <form class="form-card" onsubmit="event.preventDefault();">
+        <div class="field"><label>Origin country</label><select><option>India</option><option>Malaysia</option><option>USA</option><option>Argentina</option><option>China</option></select></div>
+        <div class="field"><label>Destination country</label><select><option>Uzbekistan</option><option>Kazakhstan</option><option>Kyrgyzstan</option><option>Turkmenistan</option><option>Tajikistan</option></select></div>
+        <div class="field"><label>Company</label><input type="text" placeholder="Your company"></div>
+        <div class="field"><label>Email or phone</label><input type="text" placeholder="procurement@company.com"></div>
+        <div class="field"><label>Cargo type</label><select><option>Container — FCL</option><option>Container — LCL</option><option>Project / oversized</option><option>Air freight</option><option>Reefer</option><option>Dangerous goods</option></select></div>
+        <div class="field"><label>Estimated volume / weight</label><input type="text" placeholder="e.g. 2 × 40ft HC, ~48t"></div>
+        <div class="field full"><label>Anything specific we should know</label><textarea rows="3" placeholder="Target delivery date, Incoterms, special handling..." style="font-family: var(--sans);"></textarea></div>
+        <div class="upload">📎 Upload cargo list (.xlsx / .pdf) — optional<span style="color: var(--cyan);">ATTACH →</span></div>
+        <button type="submit" class="submit">Send to my corridor specialist →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div>
+      <div class="logo" style="color: var(--text);"><span class="mark">L</span>LAZARUS</div>
+      <div style="margin-top: 20px; font-size: 14px; line-height: 1.55;">Katlakalna 9a, Riga LV-1073, Latvia · EU<br>International freight forwarder · since 2016<br>Member: Freight Forwarders Family · Global Logistic Alliance</div>
+    </div>
+    <div><h4>CORRIDORS</h4><a>India → Uzbekistan</a><a>India → Kazakhstan</a><a>USA → Kazakhstan</a><a>Argentina → Uzbekistan</a><a>All 20 corridors →</a></div>
+    <div><h4>SERVICES</h4><a>Multimodal</a><a>Project / oversized</a><a>Rail</a><a>Reefer</a><a>Dangerous goods</a></div>
+    <div><h4>COMPANY</h4><a>About</a><a>Case studies</a><a>Corridor guides</a><a>Careers</a><a>Contact</a></div>
+  </div>
+  <div class="meta" style="max-width: 1440px; margin: 40px auto 0;">
+    <span>© 2026 LAZARUS FORWARDING · LATVIA</span>
+    <span>EN · RU · LV · KZ · UZ (coming)</span>
+  </div>
+</footer>
+
+<script>
+  // Rate calc presets — hardcoded lookup for mockup
+  const rates = {
+    'India-Uzbekistan':    ['€3,800 – €5,200', 'Transit 28–35 days · India → Uzbekistan via Bandar Abbas'],
+    'India-Kazakhstan':    ['€3,600 – €5,000', 'Transit 30–38 days · India → Kazakhstan via Bandar Abbas → rail'],
+    'India-Kyrgyzstan':    ['€4,100 – €5,600', 'Transit 32–40 days · multimodal via Bandar Abbas'],
+    'India-Turkmenistan':  ['€3,500 – €4,800', 'Transit 26–34 days · sea + rail via Bandar Abbas'],
+    'India-Tajikistan':    ['€4,300 – €5,900', 'Transit 35–45 days · multimodal'],
+    'Malaysia-Uzbekistan': ['€4,200 – €5,700', 'Transit 33–40 days · sea + rail via Bandar Abbas'],
+    'Malaysia-Kazakhstan': ['€4,000 – €5,500', 'Transit 35–42 days · sea + rail'],
+    'USA-Kazakhstan':      ['€5,400 – €7,200', 'Transit 38–48 days · sea + rail via Caspian'],
+    'USA-Uzbekistan':      ['€5,800 – €7,600', 'Transit 40–50 days · sea + rail via Caspian'],
+    'Argentina-Uzbekistan':['€6,200 – €8,400', 'Transit 46–60 days · sea + rail via Caspian'],
+  };
+  function recalc() {
+    const o = document.getElementById('rc-origin').value.split(' ')[0];
+    const d = document.getElementById('rc-dest').value.split(' ')[0];
+    const key = `${o}-${d}`;
+    const hit = rates[key] || ['€ — request quote', 'Specialty lane · specialist will price within 2 hours'];
+    document.getElementById('rc-band').textContent = hit[0];
+    document.getElementById('rc-range').textContent = hit[1];
+  }
+  document.getElementById('rc-origin').addEventListener('change', recalc);
+  document.getElementById('rc-dest').addEventListener('change', recalc);
+  document.getElementById('rc-calc').addEventListener('click', recalc);
+</script>
+</body>
+</html>

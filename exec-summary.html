@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lazarus · Executive Summary · Long-haul Corridor Opportunity</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  @page { size: A4; margin: 18mm; }
+  body { background: #0B1929; }
+  @media print { body { background: #fff; } .sheet { margin: 0 !important; box-shadow: none !important;} }
+  .sheet {
+    max-width: 820px; margin: 40px auto; background: #fff; color: #0B1929;
+    padding: 48px 56px; font-family: "Inter", sans-serif; font-size: 13px; line-height: 1.5;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .top { display:flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #0B1929; padding-bottom: 14px;}
+  .top .l { display:flex; align-items:center; gap: 10px; font-family: "Archivo"; font-weight: 800; font-size: 20px;}
+  .top .l .m { width: 24px; height: 24px; border: 1.5px solid #0B1929; display:flex; align-items:center; justify-content:center; color:#0B1929; font-size: 14px;}
+  .top .r { font-family: "JetBrains Mono"; font-size: 10px; letter-spacing: 0.14em; color: #5a6578; text-align: right;}
+  h1 { font-family: "Archivo"; font-weight: 800; font-size: 32px; line-height: 1.04; letter-spacing: -0.02em; margin: 20px 0 8px;}
+  .sub { color: #4a5569; font-size: 14px; margin-bottom: 20px;}
+  .headline {
+    background: #FF6B3D; color: #fff; padding: 22px 26px; margin: 20px 0; display:flex; justify-content: space-between; align-items: center;
+  }
+  .headline .big { font-family: "Archivo"; font-weight: 800; font-size: 36px; line-height: 1; letter-spacing: -0.02em;}
+  .headline .lbl { font-family: "JetBrains Mono"; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85;}
+  h2 { font-family: "Archivo"; font-weight: 700; font-size: 15px; margin: 22px 0 10px; letter-spacing: 0.04em; text-transform: uppercase; color: #00507A; border-bottom: 1px solid #dce3ec; padding-bottom: 6px;}
+  p { margin: 0 0 10px;}
+  .kpis { display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0;}
+  .kp { border: 1px solid #dce3ec; padding: 10px 12px;}
+  .kp .k { font-family: "JetBrains Mono"; font-size: 9px; letter-spacing: 0.12em; color: #5a6578; text-transform: uppercase;}
+  .kp .v { font-family: "Archivo"; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; margin-top: 4px;}
+  .kp .v.pos { color: #008845;}
+  .kp .v.warn { color: #FF6B3D;}
+  ul.clean { list-style: none; padding-left: 0; margin: 6px 0;}
+  ul.clean li { padding: 4px 0; padding-left: 18px; position: relative;}
+  ul.clean li::before { content: "◆"; position: absolute; left: 0; color: #00507A; font-size: 9px; top: 7px;}
+  .corridors { display:grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin: 8px 0;}
+  .corridors .c { background: #f2f5fa; padding: 8px 10px; font-family: "JetBrains Mono"; font-size: 11px; display:flex; justify-content: space-between;}
+  .corridors .c .d { color: #00507A; font-weight: 600;}
+  .phasing { display:grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 8px 0;}
+  .ph { border: 1px solid #dce3ec; padding: 12px;}
+  .ph .tag { font-family: "JetBrains Mono"; font-size: 10px; letter-spacing: 0.12em; color: #00507A;}
+  .ph h4 { font-family: "Archivo"; font-size: 14px; margin: 4px 0 6px;}
+  .ph .w { font-family: "JetBrains Mono"; font-size: 10px; color: #5a6578;}
+  .ph .cost { margin-top: 8px; font-family: "Archivo"; font-weight: 700; color: #FF6B3D;}
+  .two-col { display:grid; grid-template-columns: 1fr 1fr; gap: 16px;}
+  .foot { margin-top: 28px; padding-top: 14px; border-top: 1px solid #dce3ec; font-family: "JetBrains Mono"; font-size: 10px; color: #5a6578; letter-spacing: 0.08em; display:flex; justify-content: space-between;}
+  .model-mini { border-collapse: collapse; width: 100%; font-size: 12px;}
+  .model-mini td { padding: 5px 8px; border-bottom: 1px solid #e5eaf2;}
+  .model-mini td.num { text-align: right; font-family: "JetBrains Mono";}
+  .model-mini tr.total td { background: #eaf4fb; font-weight: 600;}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="top">
+    <div class="l"><span class="m">L</span>LAZARUS · STRATEGY MEMO</div>
+    <div class="r">CONFIDENTIAL · CEO REVIEW<br>20 · APRIL · 2026 · v1.0</div>
+  </div>
+
+  <h1>The Long-Haul Corridor Opportunity</h1>
+  <div class="sub">A one-page case for capturing high-margin freight demand into Central Asia.</div>
+
+  <div class="headline">
+    <div>
+      <div class="lbl">INCREMENTAL GROSS MARGIN · YEAR 1</div>
+      <div class="big">€103K conservative · €350K realistic</div>
+    </div>
+    <div class="lbl" style="text-align: right; line-height: 1.5;">PHASE 1 BUILD<br><span style="font-family: Archivo; font-size: 20px; font-weight: 700;">€22K</span></div>
+  </div>
+
+  <h2>The opportunity</h2>
+  <p>Our own sales team confirms the highest-margin, least-crowded freight we can win is <b>long-haul cargo from India, Malaysia, USA and Argentina into Kazakhstan, Uzbekistan, Kyrgyzstan, Turkmenistan and Tajikistan.</b> The demand is growing 35–55% YoY on these lanes. The category SERP is dominated by aggregators and generalist pages — no forwarder has published a true corridor specialist surface. Lazarus has the operational history (10 years, 121,000 t/yr, €25M cargo/yr) to rank and convert. Today our site does not capture any of this intent.</p>
+
+  <div class="kpis">
+    <div class="kp"><div class="k">US → UZ imports</div><div class="v pos">+54.9% YoY</div></div>
+    <div class="kp"><div class="k">IN → UZ imports</div><div class="v pos">+36.7% YoY</div></div>
+    <div class="kp"><div class="k">Target corridors</div><div class="v">20</div></div>
+    <div class="kp"><div class="k">Lazarus visibility today</div><div class="v warn">0 / 10,000</div></div>
+  </div>
+
+  <h2>The funnel, conservatively</h2>
+  <table class="model-mini">
+    <tr><td>20 corridors × 500 searches / mo</td><td class="num">10,000 searches / mo</td></tr>
+    <tr><td>× 18% organic CTR (top 3)</td><td class="num">1,800 clicks / mo</td></tr>
+    <tr><td>× 3% quote conversion</td><td class="num">54 quote requests / mo</td></tr>
+    <tr><td>× 15% close rate</td><td class="num">~8 bookings / mo</td></tr>
+    <tr><td>× €6,000 revenue × 18% margin</td><td class="num">€1,080 margin / shipment</td></tr>
+    <tr class="total"><td>Incremental gross margin</td><td class="num">€8,640 / month · €103,680 / year</td></tr>
+  </table>
+  <p style="font-size: 11px; color: #5a6578; margin-top: 6px;">Aggressive scenario (1,000 searches, 25% CTR, 4% conv, 20% close, €8K AOV, 22% margin) = <b>~€350K/yr.</b> 3-year LTV-adjusted range: <b>€400–600K.</b></p>
+
+  <h2>Corridors in scope</h2>
+  <div class="corridors">
+    <div class="c"><span>IN→UZ</span><span class="d">FLAGSHIP</span></div>
+    <div class="c"><span>IN→KZ</span><span class="d">P1</span></div>
+    <div class="c"><span>IN→KG</span><span class="d">P1</span></div>
+    <div class="c"><span>US→KZ</span><span class="d">P1</span></div>
+    <div class="c"><span>US→UZ</span><span class="d">P1</span></div>
+    <div class="c"><span>IN→TM</span><span class="d">P2</span></div>
+    <div class="c"><span>IN→TJ</span><span class="d">P2</span></div>
+    <div class="c"><span>MY→UZ</span><span class="d">P2</span></div>
+    <div class="c"><span>MY→KZ</span><span class="d">P2</span></div>
+    <div class="c"><span>MY→KG</span><span class="d">P2</span></div>
+    <div class="c"><span>US→KG</span><span class="d">P2</span></div>
+    <div class="c"><span>US→TM</span><span class="d">P2</span></div>
+    <div class="c"><span>US→TJ</span><span class="d">P2</span></div>
+    <div class="c"><span>AR→KZ</span><span class="d">P2</span></div>
+    <div class="c"><span>AR→UZ</span><span class="d">P2</span></div>
+    <div class="c"><span>AR→KG</span><span class="d">P2</span></div>
+    <div class="c"><span>AR→TM</span><span class="d">P2</span></div>
+    <div class="c"><span>AR→TJ</span><span class="d">P2</span></div>
+    <div class="c"><span>MY→TM</span><span class="d">P2</span></div>
+    <div class="c"><span>MY→TJ</span><span class="d">P2</span></div>
+  </div>
+
+  <h2>Phasing & investment</h2>
+  <div class="phasing">
+    <div class="ph"><div class="tag">PHASE 1 · LAUNCH</div><h4>Hub + 5 corridors + rate calculator</h4><div class="w">Weeks 1–8 · EN / RU</div><div class="cost">€18–26K</div></div>
+    <div class="ph"><div class="tag">PHASE 2 · EXPAND</div><h4>All 20 corridors + SEO engine + KZ/UZ</h4><div class="w">Weeks 8–16</div><div class="cost">€14–20K</div></div>
+    <div class="ph"><div class="tag">PHASE 3 · LOCK-IN</div><h4>Client portal + tracking + retention</h4><div class="w">Weeks 16–24</div><div class="cost">€22–32K</div></div>
+  </div>
+
+  <h2>Cost of delay</h2>
+  <p>Logistics retention ≈ 86% — whoever wins the first shipment usually keeps the client for 3–5 years at €50–200K LTV each. <b style="color:#FF6B3D;">Every month of delay ≈ €8,640–29,000 in gross margin permanently captured by a competitor.</b> A six-month delay forfeits €50–175K. A twelve-month delay compounds to €100–350K.</p>
+
+  <div class="two-col">
+    <div>
+      <h2>What Phase 1 delivers</h2>
+      <ul class="clean">
+        <li>Flagship hub page (EN + RU)</li>
+        <li>5 priority corridor child pages — CEO chooses</li>
+        <li>Instant rate calculator, scoped to those 5</li>
+        <li>CRM-integrated quote form</li>
+        <li>Google Ads live on corridor keywords @ ~€3K / month test</li>
+      </ul>
+    </div>
+    <div>
+      <h2>The ask</h2>
+      <ul class="clean">
+        <li>Approve Phase 1 at <b>€22K</b></li>
+        <li>Launch in <b>8 weeks</b></li>
+        <li>Break-even targeted by <b>Month 3–4</b></li>
+        <li>Organic share ≥ 40% by Month 6</li>
+        <li>Decision this week: every week delayed ≈ €2,000 in forfeited margin</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>PREPARED BY · GROWTH & DIGITAL STRATEGY</span>
+    <span>FULL DECK + LANDING MOCKUPS ATTACHED</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+/* Lazarus pitch package — shared design tokens */
+:root {
+  --bg: #0B1929;
+  --surface: #13233A;
+  --surface-2: #1E3A5F;
+  --line: #243A5A;
+  --line-2: #2E4C75;
+  --text: #F5F7FA;
+  --text-2: #B8C5DB;
+  --text-3: #8B9DC3;
+  --cyan: #00D4FF;
+  --green: #00FF88;
+  --amber: #FFB800;
+  --warm: #FF6B3D;
+  --ink: #07121F;
+
+  --sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --display: "Archivo", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.mono { font-family: var(--mono); }
+.display { font-family: var(--display); }
